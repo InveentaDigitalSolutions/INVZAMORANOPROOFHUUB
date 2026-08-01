@@ -164,7 +164,13 @@
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   #crumb .cs{color:var(--lime);font-size:10px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;flex:none}
   #crumb .cd{color:#2C5A47;flex:none}
-  #bar{margin-left:auto;display:flex;gap:3px;flex:none}
+  .lang{margin-left:auto;display:flex;gap:2px;flex:none;background:#0F3527;border:1px solid #1B4E3B;
+    border-radius:8px;padding:2px}
+  .lang b{font-size:10.5px;font-weight:700;letter-spacing:1px;color:#8FA79A;cursor:pointer;
+    padding:5px 10px;border-radius:6px;transition:background-color .2s,color .2s}
+  .lang b:hover{color:#fff}
+  .lang b.on{background:var(--lime);color:var(--dark)}
+  #bar{margin-left:18px;display:flex;gap:3px;flex:none}
   #bar i{width:16px;height:3px;border-radius:2px;background:#1E5340;cursor:pointer;transition:background-color .25s}
   #bar i.done{background:#2F7D5C}
   #bar i.now{background:var(--lime)}
@@ -357,6 +363,9 @@
     <header id="topbar">
       <button id="menu" aria-label="Open slide menu">☰</button>
       <div id="crumb"><span class="cs"></span><span class="cd">/</span><span class="ct"></span></div>
+      <div class="lang" role="group" aria-label="Language">
+        <b data-l="en" class="on">EN</b><b data-l="es">ES</b>
+      </div>
       <div id="bar" role="tablist" aria-label="Jump to slide"></div>
     </header>
 
@@ -701,6 +710,224 @@ S.push(`<section class="slide dark midv">
   <span class="brand l corner" role="img" aria-label="inveenta"></span>
 </section>`);
 
+/* ————————————————— Spanish ——————————————————
+   Keyed on the exact English string. Institution names, people, product
+   names, MRV/QA, Agri-PV and the like are deliberately left untranslated. */
+const ES={
+/* 01 title */
+"Zamorano University · Board of Trustees · 2026":"Universidad Zamorano · Junta de Fideicomisarios · 2026",
+"Zamorano in a Fast-Evolving":"Zamorano en un mundo tecnológico",
+"Technology World":"en rápida evolución",
+"The Tropical Proof Hub — from a European mission to a global position":"El Hub Tropical de Validación — de una misión europea a una posición global",
+"Governance first · Evidence always · Adoption at scale":"Gobernanza primero · Evidencia siempre · Adopción a escala",
+"Prepared by":"Preparado por",
+/* 02 bridge */
+"Purpose of this presentation":"Propósito de esta presentación",
+"From what we saw to what it means":"De lo que vimos a lo que significa",
+"The first presentation reported the mission. This one draws its strategic conclusions.":"La primera presentación reportó la misión. Esta extrae sus conclusiones estratégicas.",
+"The first presentation":"La primera presentación",
+"What we did.":"Lo que hicimos.",
+"A European institutional mission — 15+ organizations across Germany and the Netherlands, the leaders we met, and what the delegation observed.":"Una misión institucional europea — más de 15 organizaciones en Alemania y los Países Bajos, los líderes que conocimos y lo que observó la delegación.",
+"June 22 – July 2, 2026":"22 de junio – 2 de julio de 2026",
+"This presentation":"Esta presentación",
+"What it means.":"Lo que significa.",
+"How agriculture is changing, the role Zamorano is uniquely built to hold, and how these separate visits become one coherent architecture.":"Cómo está cambiando la agricultura, el rol que Zamorano está singularmente construido para ocupar, y cómo estas visitas separadas se convierten en una sola arquitectura coherente.",
+"A holistic view for the Board":"Una visión integral para la Junta",
+"ZAMORANO · THE TROPICAL PROOF HUB":"ZAMORANO · EL HUB TROPICAL DE VALIDACIÓN",
+/* 03 the shift */
+"The context":"El contexto",
+"Success in agriculture is being redefined":"El éxito en la agricultura se está redefiniendo",
+"Yield alone no longer describes the performance of a production system.":"El rendimiento por sí solo ya no describe el desempeño de un sistema productivo.",
+"Measured by":"Medido por",
+"Yield":"Rendimiento",
+"Productivity":"Productividad",
+"One discipline at a time":"Una disciplina a la vez",
+"Now measured by":"Ahora medido por",
+"Nutritional yield":"Rendimiento nutricional",
+"— protein & micronutrient delivery per hectare":"— aporte de proteína y micronutrientes por hectárea",
+"Resilience":"Resiliencia",
+"— under heat, elevated CO₂ and ozone stress":"— bajo calor y estrés por CO₂ elevado y ozono",
+"Food safety & traceability":"Inocuidad y trazabilidad",
+"— lower mycotoxin and contamination risk":"— menor riesgo de micotoxinas y contaminación",
+"Adoption at scale":"Adopción a escala",
+"— validated practices producers actually use":"— prácticas validadas que los productores realmente usan",
+"Rising CO₂ and temperatures cut protein and key micronutrients in staple crops — so performance must be validated, measured and reproduced under real conditions.":"El aumento del CO₂ y de las temperaturas reduce la proteína y micronutrientes clave en cultivos básicos — por eso el desempeño debe validarse, medirse y reproducirse en condiciones reales.",
+/* 04 convergence */
+"The fast-evolving technology world":"El mundo tecnológico en rápida evolución",
+"The frontier has moved to the digital–biological intersection":"La frontera se ha desplazado a la intersección digital–biológica",
+"Tomorrow's agriculture will not be transformed by agriculture alone — but by the convergence of these capabilities.":"La agricultura del mañana no será transformada por la agricultura sola — sino por la convergencia de estas capacidades.",
+"AI & exascale computing":"IA y computación a exaescala",
+"Simulation of climate, soil and biological systems (JUWELS · JUPITER).":"Simulación de sistemas climáticos, de suelo y biológicos (JUWELS · JUPITER).",
+"Advanced phenotyping & sensing":"Fenotipado avanzado y sensórica",
+"Hyperspectral, fluorescence and field-to-cloud measurement.":"Medición hiperespectral, de fluorescencia y del campo a la nube.",
+"Robotics & automation":"Robótica y automatización",
+"Field and controlled-environment operations at scale.":"Operaciones de campo y de ambiente controlado a escala.",
+"Omics & microbiome":"Ómicas y microbioma",
+"Genetics and biological function of soil, plant and product.":"Genética y función biológica del suelo, la planta y el producto.",
+"Controlled-environment ag":"Agricultura en ambiente controlado",
+"Greenhouse and vertical systems, resource-efficient production.":"Sistemas de invernadero y verticales, producción eficiente en recursos.",
+"Energy & agrivoltaics":"Energía y agrivoltaica",
+"Food and energy generated on a single land base.":"Alimento y energía generados sobre una misma base de tierra.",
+/* 05 connectivity */
+"A new institutional characteristic":"Una nueva característica institucional",
+"Not only scientific excellence — scientific connectivity":"No solo excelencia científica — conectividad científica",
+"Scientific excellence":"Excelencia científica",
+"The quality of research produced within an institution.":"La calidad de la investigación producida dentro de una institución.",
+"Indispensable — but it describes only part of the environment in which frontier science is now made.":"Indispensable — pero describe solo una parte del entorno en el que hoy se hace la ciencia de frontera.",
+"Scientific connectivity":"Conectividad científica",
+"The ability to plug into the global ecosystems where new knowledge emerges.":"La capacidad de conectarse a los ecosistemas globales donde emerge el nuevo conocimiento.",
+"To participate in, contribute to, and benefit from advances that no single institution generates alone.":"Participar en, contribuir a y beneficiarse de avances que ninguna institución genera por sí sola.",
+"As agricultural challenges grow more complex, connectivity becomes part of scientific capacity itself.":"A medida que los desafíos agrícolas se vuelven más complejos, la conectividad pasa a formar parte de la propia capacidad científica.",
+/* 06 open role */
+"The open role":"El rol por ocupar",
+"No single ecosystem does it all":"Ningún ecosistema lo hace todo",
+"Each leading research ecosystem leads somewhere — none combines frontier capability with tropical proof-at-scale.":"Cada ecosistema líder de investigación lidera en algo — ninguno combina capacidad de frontera con validación tropical a escala.",
+"HPC / AI, phenotyping, sensors, quantum":"HPC / IA, fenotipado, sensores, cuántica",
+"Nanofab + photonics → CEA → post-harvest":"Nanofabricación + fotónica → ambiente controlado → poscosecha",
+"Systems, circularity & living labs":"Sistemas, circularidad y laboratorios vivos",
+"Policy, One-Health & agro-system depth":"Políticas, One-Health y profundidad agrosistémica",
+"Post-harvest, food safety & extension":"Poscosecha, inocuidad alimentaria y extensión",
+"The gap — and therefore the role":"La brecha — y por lo tanto el rol",
+"Tropical proof-at-scale":"Validación tropical a escala",
+"+ standardized nutritional-yield metrics + auditable MRV/QA built for resource-limited settings.":"+ métricas estandarizadas de rendimiento nutricional + MRV/QA auditable diseñado para entornos con recursos limitados.",
+/* 07 advantage */
+"Comparative advantage":"Ventaja comparativa",
+"Zamorano is built to fill it":"Zamorano está construido para ocuparlo",
+"A living agricultural system where research, education, production and extension operate as one platform.":"Un sistema agrícola vivo donde investigación, educación, producción y extensión operan como una sola plataforma.",
+"Hectares":"Hectáreas",
+"A living agricultural system — not a research plot. Innovations are tested under real farm dynamics.":"Un sistema agrícola vivo — no una parcela experimental. Las innovaciones se prueban bajo la dinámica real de una finca.",
+"Field":"Campo",
+"Farmer-ready":"Listo para el productor",
+"Validation under real production conditions, not discovery alone — closing the prototype-to-proof gap.":"Validación en condiciones reales de producción, no solo descubrimiento — cerrando la brecha entre prototipo y prueba.",
+"Neutral":"Neutral",
+"Pan-Latin ground":"Terreno panlatinoamericano",
+"Non-governmental and regionally neutral — a trusted convening site for multinational validation.":"No gubernamental y regionalmente neutral — un espacio de convocatoria confiable para la validación multinacional.",
+"Student":"Estudiante",
+"To-field chain":"Cadena hacia el campo",
+"An alumni network across every agro-ecological zone of Latin America — translation faster than any extension service.":"Una red de egresados en cada zona agroecológica de América Latina — una transferencia más rápida que cualquier servicio de extensión.",
+/* 08 hub */
+"The strategic position":"La posición estratégica",
+"The Tropical Proof Hub":"El Hub Tropical de Validación",
+"Zamorano does not replicate frontier discovery — it validates, adapts and transfers it at scale.":"Zamorano no replica el descubrimiento de frontera — lo valida, lo adapta y lo transfiere a escala.",
+"Discovery":"Descubrimiento",
+"Global partners":"Socios globales",
+"Science accessed through collaboration — not duplicated in-house.":"Ciencia accedida mediante colaboración — no duplicada internamente.",
+"Validation":"Validación",
+"Tested under tropical biological complexity, with auditable MRV/QA.":"Probado bajo la complejidad biológica tropical, con MRV/QA auditable.",
+"Adoption":"Adopción",
+"Producers & partners":"Productores y socios",
+"Reliable, transferable systems put to work across the tropics.":"Sistemas confiables y transferibles puestos a trabajar en todo el trópico.",
+/* 09 architecture */
+"The European mission":"La misión europea",
+"The mission was not a tour — it was an architecture":"La misión no fue una gira — fue una arquitectura",
+"Each institution maps to a capability Zamorano needs. Together they form five pillars.":"Cada institución corresponde a una capacidad que Zamorano necesita. Juntas forman cinco pilares.",
+"Discovery &":"Descubrimiento y",
+"hard-tech anchor":"ancla tecnológica",
+"Mechanization &":"Mecanización y",
+"soil systems":"sistemas de suelo",
+"Dairy":"Transformación",
+"transformation":"lechera",
+"Protected ag,":"Agricultura protegida,",
+"seeds & markets":"semillas y mercados",
+"Energy–land &":"Energía–tierra y",
+"ecosystem models":"modelos de ecosistema",
+/* 10–14 pillars */
+"Pillar 1 · Discovery & hard-tech anchor":"Pilar 1 · Descubrimiento y ancla tecnológica",
+"Access to frontier science, without owning it":"Acceso a la ciencia de frontera, sin tener que poseerla",
+"Capability gained":"Capacidad adquirida",
+"What it unlocks for Zamorano":"Lo que habilita para Zamorano",
+"Met:":"Reuniones:",
+"Frontier plant phenotyping, AI and exascale modeling, bioeconomy and perennial-biomass science, and field-to-cloud research platforms — an integrated scientific ecosystem spanning discovery to field application.":"Fenotipado vegetal de frontera, IA y modelado a exaescala, bioeconomía y ciencia de biomasa perenne, y plataformas de investigación del campo a la nube — un ecosistema científico integrado que abarca desde el descubrimiento hasta la aplicación en campo.",
+"A discovery anchor Zamorano can translate into field-validated tropical systems — the science it accesses through partnership rather than replicates, with complementary tropical validation Jülich cannot perform.":"Un ancla de descubrimiento que Zamorano puede traducir en sistemas tropicales validados en campo — ciencia a la que accede mediante alianzas en lugar de replicarla, con una validación tropical complementaria que Jülich no puede realizar.",
+"Pillar 2 · Mechanization & soil systems":"Pilar 2 · Mecanización y sistemas de suelo",
+"Machinery as part of the learning architecture":"La maquinaria como parte de la arquitectura de aprendizaje",
+"System-level mechanization: machine–soil–crop interaction, controlled tillage and seedbed quality, precision and non-chemical crop care, and digital fleet management across large areas.":"Mecanización a nivel de sistema: interacción máquina–suelo–cultivo, labranza controlada y calidad de la cama de siembra, cuidado del cultivo de precisión y no químico, y gestión digital de flotas en grandes superficies.",
+"Productive units run as teaching-integrated operations, with equipment chosen by agronomic objective rather than machine-by-machine. CLAAS has asked Zamorano to define its future equipment and training needs.":"Unidades productivas operadas como operaciones integradas a la docencia, con equipos elegidos por objetivo agronómico y no máquina por máquina. CLAAS ha pedido a Zamorano definir sus necesidades futuras de equipo y capacitación.",
+"Pillar 3 · Dairy transformation":"Pilar 3 · Transformación lechera",
+"Two visions of advanced dairy, compared":"Dos visiones de la lechería avanzada, comparadas",
+"Complementary references for dairy modernization — GEA's conventional and rotary-carousel systems observed in commercial operation, and Lely's fully robotic, automated model — spanning herd monitoring, welfare and regenerative practice.":"Referencias complementarias para la modernización lechera — los sistemas convencionales y de carrusel rotativo de GEA observados en operación comercial, y el modelo totalmente robotizado y automatizado de Lely — abarcando monitoreo del hato, bienestar animal y prácticas regenerativas.",
+"A technically grounded modernization path for Zamorano's dairy, plus a partner for the training and workforce development that responsible adoption requires across Latin America. GEA and Lely quotations are in evaluation.":"Una ruta de modernización técnicamente fundamentada para la lechería de Zamorano, más un socio para la capacitación y el desarrollo de talento que la adopción responsable exige en América Latina. Las cotizaciones de GEA y Lely están en evaluación.",
+"Pillar 4 · Protected agriculture, seeds & markets":"Pilar 4 · Agricultura protegida, semillas y mercados",
+"From genetics to greenhouse to global market":"De la genética al invernadero al mercado global",
+"Greenhouse-based seed production, high-value specialty crops, controlled-environment technology, and market intelligence — value created through quality, differentiation and market access, not volume alone.":"Producción de semilla en invernadero, cultivos especializados de alto valor, tecnología de ambiente controlado e inteligencia de mercado — valor creado mediante calidad, diferenciación y acceso a mercados, no solo volumen.",
+"A pathway to greenhouse and seed programs under tropical conditions, student mobility into leading horticultural environments, and a route connecting Zamorano's production to international markets.":"Una vía hacia programas de invernadero y semilla en condiciones tropicales, movilidad estudiantil a entornos hortícolas líderes, y una ruta que conecta la producción de Zamorano con mercados internacionales.",
+"Pillar 5 · Energy–land integration & ecosystem models":"Pilar 5 · Integración energía–tierra y modelos de ecosistema",
+"Multi-output land; the networked campus":"Tierra de múltiples productos; el campus en red",
+"Agrivoltaics and multi-output land use — food and energy generated on a single land base — alongside open-innovation campus models where education, research and industry continuously co-create.":"Agrivoltaica y uso múltiple de la tierra — alimento y energía generados sobre una misma base de tierra — junto a modelos de campus de innovación abierta donde educación, investigación e industria co-crean de forma continua.",
+"A conceptual and operational reference for the Living Campus / WPIC, and a basis for evaluating agrivoltaics under tropical conditions without compromising biological productivity.":"Una referencia conceptual y operativa para el Campus Vivo / WPIC, y una base para evaluar la agrivoltaica en condiciones tropicales sin comprometer la productividad biológica.",
+/* 15 governance */
+"Partner architecture":"Arquitectura de socios",
+"Two pillars, one governance":"Dos pilares, una gobernanza",
+"Partnerships are organized by complementary strengths — not institutional similarity.":"Las alianzas se organizan por fortalezas complementarias — no por similitud institucional.",
+"Hard-tech anchor":"Ancla tecnológica",
+"Deep measurement, modeling, sensors, controlled-environment and energy systems.":"Medición profunda, modelado, sensores, ambiente controlado y sistemas energéticos.",
+"e.g. Forschungszentrum Jülich":"p. ej. Forschungszentrum Jülich",
+"Systems / transfer partner":"Socio de sistemas / transferencia",
+"Post-harvest, food safety, economics and extension networks.":"Poscosecha, inocuidad alimentaria, economía y redes de extensión.",
+"e.g. Duke · UC Davis · applied innovation campuses":"p. ej. Duke · UC Davis · campus de innovación aplicada",
+"MRV / QA — the common operating language":"MRV / QA — el lenguaje operativo común",
+"Standardized data, traceable workflows, FAIR principles and clear IP turn scientific results into auditable operational protocols. Co-PI structures and shared benefit keep the evidence locally owned.":"Datos estandarizados, flujos de trabajo trazables, principios FAIR y propiedad intelectual clara convierten los resultados científicos en protocolos operativos auditables. Las estructuras de co-investigación principal y el beneficio compartido mantienen la evidencia en manos locales.",
+/* 16 momentum */
+"Momentum":"Impulso",
+"Already in motion — built, not proposed":"Ya en marcha — construido, no propuesto",
+"Aug 17, 2026":"17 de agosto de 2026",
+"Dr. Onno Müller visits Zamorano":"El Dr. Onno Müller visita Zamorano",
+"Representing Forschungszentrum Jülich, Brightlands and BASF Nunhems — advancing agrivoltaics, protected agriculture and student engagement.":"En representación de Forschungszentrum Jülich, Brightlands y BASF Nunhems — avanzando en agrivoltaica, agricultura protegida y vinculación estudiantil.",
+"Proof of concept":"Prueba de concepto",
+"Duke University node":"Nodo Duke University",
+"A proposed nutrient-sensing and food-innovation pilot that validates the Hub's institutional workflow under MRV/QA.":"Un piloto propuesto de sensórica de nutrientes e innovación alimentaria que valida el flujo institucional del Hub bajo MRV/QA.",
+"Requested":"Solicitado",
+"CLAAS equipment & training roadmap":"Hoja de ruta de equipo y capacitación CLAAS",
+"CLAAS formally asked Zamorano to define its medium- and long-term equipment and training needs for technical cooperation.":"CLAAS solicitó formalmente a Zamorano definir sus necesidades de equipo y capacitación a mediano y largo plazo para la cooperación técnica.",
+"In evaluation":"En evaluación",
+"GEA & Lely dairy quotations":"Cotizaciones lecheras de GEA y Lely",
+"Two leading dairy technologies under active comparison to inform Zamorano's modernization decisions.":"Dos tecnologías lecheras líderes en comparación activa para informar las decisiones de modernización de Zamorano.",
+/* 17 closing */
+"The holistic view":"La visión integral",
+"Zamorano is not a research institute.":"Zamorano no es un instituto de investigación.",
+"It is the tropical validation platform where global science is tested, proven, and translated into practice at scale.":"Es la plataforma tropical de validación donde la ciencia global se prueba, se comprueba y se traduce en práctica a escala.",
+"Over the next five years":"En los próximos cinco años",
+"more validated practices put to work":"más prácticas validadas puestas en uso",
+"Nutrition & safety":"Nutrición e inocuidad",
+"protected under climate stress":"protegidas bajo estrés climático",
+"Efficiency":"Eficiencia",
+"improved resource-use per output":"mejor uso de recursos por unidad producida",
+"Traceability":"Trazabilidad",
+"full MRV/QA with independent verification":"MRV/QA completo con verificación independiente",
+/* "Met:" lines — names stay, job titles and connecting text translate */
+"Joerg Wesseimann, Global Product Team Manager – JAGUAR (CLAAS); Luisa Urbanowski, Market Development Manager (LEMKEN).":"Joerg Wesseimann, Gerente Global de Producto – JAGUAR (CLAAS); Luisa Urbanowski, Gerente de Desarrollo de Mercado (LEMKEN).",
+"Hao Shen and Esteban Romnero (GEA); Henk van Dongen, Director of Alternatives & Regenerative Agriculture (Lely).":"Hao Shen y Esteban Romnero (GEA); Henk van Dongen, Director de Alternativas y Agricultura Regenerativa (Lely).",
+"Site teams at the Agri-Food-Energy Park and the Bedburg Agri-PV facility (Forschungszentrum Jülich · RWE).":"Equipos de sitio del Agri-Food-Energy Park y de la instalación Agri-PV de Bedburg (Forschungszentrum Jülich · RWE).",
+"LEMKEN — incl. Crop Care":"LEMKEN — incl. Crop Care",
+/* acts */
+"Opening":"Apertura",
+"Act 1 · The shift":"Acto 1 · El cambio",
+"Act 2 · The open role":"Acto 2 · El rol por ocupar",
+"Act 3 · Already underway":"Acto 3 · Ya en marcha",
+/* interface */
+"Board of Trustees · 2026":"Junta de Fideicomisarios · 2026",
+"▦ Slides":"▦ Diapositivas",
+"☰ Read":"☰ Leer",
+"▶ Present":"▶ Presentar",
+"? Help":"? Ayuda",
+"All slides":"Todas las diapositivas",
+"Click any slide to jump · Esc to close":"Haga clic en cualquier diapositiva para ir a ella · Esc para cerrar",
+"Keyboard & controls":"Teclado y controles",
+"Next / previous slide":"Diapositiva siguiente / anterior",
+"Space":"Espacio",
+"Reading view":"Vista de lectura",
+"Present mode (hide chrome)":"Modo presentación (ocultar interfaz)",
+"Fullscreen":"Pantalla completa",
+"First / last slide":"Primera / última diapositiva",
+"Close any panel":"Cerrar cualquier panel",
+"Link to one slide":"Enlazar a una diapositiva",
+"← / → to navigate · ? for shortcuts":"← / → para navegar · ? para atajos"
+};
+const DOC={en:{title:"Zamorano — The Tropical Proof Hub"},
+           es:{title:"Zamorano — El Hub Tropical de Validación"}};
+let LANG='en';
+const tr=s=>LANG==='es'?(ES[s]||s):s;
+
 /* ---- render + nav ---- */
 const scaler=document.getElementById('scaler');
 scaler.innerHTML=S.join('');
@@ -720,7 +947,7 @@ const titleOf=s=>{
   return t||((s.querySelector('.eyebrow')||{}).textContent||'Slide').trim();
 };
 const leadOf=s=>((s.querySelector('.sub,.t-sub')||{}).textContent||'').trim();
-const titles=slides.map(titleOf);
+let titles=slides.map(titleOf);
 
 /* the three-act spine (docs/00-strategic-narrative.md), plus the opening */
 const ACTS=[
@@ -730,20 +957,27 @@ const ACTS=[
   {name:'Act 3 · Already underway',from:9, to:17}
 ];
 const actOf=n=>ACTS.find(a=>n>=a.from&&n<=a.to)||ACTS[0];
+const actName=a=>tr(a.name);
 
 /* ——— left rail: acts → slides ——— */
 const secnav=document.getElementById('secnav');
-ACTS.forEach((a,ai)=>{
-  const wrap=document.createElement('div');
-  wrap.className='act';
-  const items=[];
-  for(let n=a.from;n<=a.to;n++)
-    items.push(`<button class="navitem" data-i="${n-1}"><span class="n">${pad(n)}</span><span>${titles[n-1]}</span></button>`);
-  wrap.innerHTML=`<button class="act-h" data-act="${ai}">${a.name}<span class="caret">▼</span></button>
-    <div class="act-list">${items.join('')}</div>`;
-  secnav.appendChild(wrap);
-});
-const navitems=[...secnav.querySelectorAll('.navitem')];
+let navitems=[];
+function buildRail(){
+  const shut=[...secnav.querySelectorAll('.act')].map(a=>a.classList.contains('shut'));
+  secnav.innerHTML='';
+  ACTS.forEach((a,ai)=>{
+    const wrap=document.createElement('div');
+    wrap.className='act'+(shut[ai]?' shut':'');
+    const items=[];
+    for(let n=a.from;n<=a.to;n++)
+      items.push(`<button class="navitem" data-i="${n-1}"><span class="n">${pad(n)}</span><span>${titles[n-1]}</span></button>`);
+    wrap.innerHTML=`<button class="act-h" data-act="${ai}">${actName(a)}<span class="caret">▼</span></button>
+      <div class="act-list">${items.join('')}</div>`;
+    secnav.appendChild(wrap);
+  });
+  navitems=[...secnav.querySelectorAll('.navitem')];
+}
+buildRail();
 secnav.addEventListener('click',e=>{
   const h=e.target.closest('.act-h');
   if(h){h.parentElement.classList.toggle('shut');return;}
@@ -753,33 +987,43 @@ secnav.addEventListener('click',e=>{
 
 /* ——— top bar: crumb + segmented progress ——— */
 const bar=document.getElementById('bar'),crumb=document.getElementById('crumb');
-slides.forEach((s,i)=>{
-  const seg=document.createElement('i');
-  seg.dataset.i=i;seg.title=pad(i+1)+' · '+titles[i];
-  bar.appendChild(seg);
-});
+let segs=[];
+function buildBar(){
+  bar.innerHTML='';
+  slides.forEach((s,i)=>{
+    const seg=document.createElement('i');
+    seg.dataset.i=i;seg.title=pad(i+1)+' · '+titles[i];
+    bar.appendChild(seg);
+  });
+  segs=[...bar.children];
+}
+buildBar();
 bar.addEventListener('click',e=>{if(e.target.dataset.i!==undefined)show(+e.target.dataset.i);});
-const segs=[...bar.children];
 
 /* ——— overview, grouped by act ——— */
-ACTS.forEach(a=>{
-  const h=document.createElement('div');
-  h.className='gact';h.textContent=a.name;
-  gg.appendChild(h);
-  const row=document.createElement('div');
-  row.style.cssText='display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:16px';
-  for(let n=a.from;n<=a.to;n++){
-    const t=document.createElement('button');
-    t.className='thumb';t.dataset.i=n-1;
-    t.innerHTML=`<div class="tn">${pad(n)}</div><div class="tt">${titles[n-1]}</div>`;
-    row.appendChild(t);
-  }
-  gg.appendChild(row);
-});
-const thumbs=[...gg.querySelectorAll('.thumb')];
+let thumbs=[];
+function buildOverview(){
+  gg.innerHTML='';
+  ACTS.forEach(a=>{
+    const h=document.createElement('div');
+    h.className='gact';h.textContent=actName(a);
+    gg.appendChild(h);
+    const row=document.createElement('div');
+    row.style.cssText='display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:16px';
+    for(let n=a.from;n<=a.to;n++){
+      const t=document.createElement('button');
+      t.className='thumb';t.dataset.i=n-1;
+      t.innerHTML=`<div class="tn">${pad(n)}</div><div class="tt">${titles[n-1]}</div>`;
+      row.appendChild(t);
+    }
+    gg.appendChild(row);
+  });
+  thumbs=[...gg.querySelectorAll('.thumb')];
+}
+buildOverview();
 
 /* ——— reading view: the deck's own text, laid out as a document ——— */
-(function buildRead(){
+function buildRead(){
   const read=document.getElementById('read');
   const esc=x=>x.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
   let html=`<div class="rd-hero">
@@ -812,14 +1056,15 @@ const thumbs=[...gg.querySelectorAll('.thumb')];
     }).join('');
     const chips=[...s.querySelectorAll('.chip')].map(c=>`<span>${esc(c.textContent.trim())}</span>`).join('');
     html+=`<section class="rd-sec" id="rd${i+1}">
-      <div class="rd-n">${pad(i+1)} · ${esc((s.querySelector('.eyebrow')||{}).textContent||actOf(i+1).name)}</div>
+      <div class="rd-n">${pad(i+1)} · ${esc((s.querySelector('.eyebrow')||{}).textContent||actName(actOf(i+1)))}</div>
       <h2>${esc(titles[i])}</h2>
       ${leadOf(s)?`<div class="rd-lead">${esc(leadOf(s))}</div>`:''}
       ${chips?`<div class="rd-tags">${chips}</div>`:''}
       ${items}</section>`;
   });
   read.innerHTML=html+'</div>';
-})();
+}
+buildRead();
 
 function show(i,back){
   const n=(i+slides.length)%slides.length;
@@ -832,7 +1077,7 @@ function show(i,back){
   navitems.forEach(t=>t.classList.toggle('now',+t.dataset.i===n));
   segs.forEach((s,k)=>{s.classList.toggle('now',k===n);s.classList.toggle('done',k<n);});
   const a=actOf(n+1);
-  crumb.querySelector('.cs').textContent=a.name;
+  crumb.querySelector('.cs').textContent=actName(a);
   crumb.querySelector('.ct').textContent=titles[n];
   const it=navitems[n]; if(it&&it.closest('.act').classList.contains('shut'))it.closest('.act').classList.remove('shut');
   if(it)it.scrollIntoView({block:'nearest'});
@@ -925,6 +1170,44 @@ addEventListener('hashchange',()=>{
   if(n>=1&&n<=slides.length)show(n-1);
 });
 
+/* ——————————— language ———————————
+   Text nodes in the slides and the static chrome are snapshotted once in
+   English, then swapped in place. Everything derived from the slides (rail,
+   overview, reading view, breadcrumb) is rebuilt from the swapped DOM. */
+const NODES=[];
+['scaler','help','nav','hint'].forEach(id=>{
+  const root=document.getElementById(id);
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+  let n; while(n=w.nextNode()){
+    const key=n.nodeValue.replace(/\s+/g,' ').trim();
+    if(key)NODES.push({node:n,en:n.nodeValue,key});
+  }
+});
+[...document.querySelectorAll('.rbtn,.rail-sub,#grid h2,#grid .gsub')].forEach(el=>{
+  const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);
+  let n; while(n=w.nextNode()){
+    const key=n.nodeValue.replace(/\s+/g,' ').trim();
+    if(key)NODES.push({node:n,en:n.nodeValue,key});
+  }
+});
+
+function setLang(lang){
+  LANG=(lang==='es')?'es':'en';
+  NODES.forEach(r=>{r.node.nodeValue=LANG==='es'?(ES[r.key]||r.en):r.en;});
+  document.documentElement.lang=LANG;
+  document.title=DOC[LANG].title;
+  document.querySelector('.rail-title').textContent=
+    LANG==='es'?'El Hub Tropical de Validación':'The Tropical Proof Hub';
+  titles=slides.map(titleOf);                     // headings changed → rebuild everything derived
+  buildRail();buildBar();buildOverview();buildRead();
+  [...document.querySelectorAll('.lang b')].forEach(b=>b.classList.toggle('on',b.dataset.l===LANG));
+  try{localStorage.setItem('tph-lang',LANG);}catch(e){}
+  show(cur,false);
+}
+document.querySelector('.lang').addEventListener('click',e=>{
+  const b=e.target.closest('b'); if(b)setLang(b.dataset.l);
+});
+
 /* scale the 1280×720 stage into whatever space the shell leaves it */
 const wrap=document.getElementById('stagewrap');
 function fit(){
@@ -944,6 +1227,10 @@ function autoRead(){
 fit();
 const start=parseInt(location.hash.slice(1),10);
 show(start>=1&&start<=slides.length?start-1:0,false);
+let saved=null;
+try{saved=localStorage.getItem('tph-lang');}catch(e){}
+const urlLang=/[?&]lang=es/.test(location.search)?'es':/[?&]lang=en/.test(location.search)?'en':null;
+if(urlLang||saved==='es')setLang(urlLang||saved);
 autoRead();
 setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity='0';},5000);
 </script>

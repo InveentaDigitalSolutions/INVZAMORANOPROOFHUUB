@@ -41,6 +41,12 @@ It opens as an application rather than a bare slideshow: a left rail lists all 1
 | **Present** (`P`) | Hides the rail and top bar for a clean projected view; entering fullscreen switches to it automatically |
 | **All slides** (`O`) | Every slide as a card, grouped by act — click to jump |
 
+### Languages
+
+English and Spanish, switched with the **EN / ES** control in the top bar; the choice is remembered, and `?lang=es` forces Spanish on open. Everything switches — slides, rail, overview, reading view and the interface itself — while slide numbers and `#n` deep links stay the same in both languages.
+
+Institution names, product names, people, and `MRV/QA` / `Agri-PV` / `FAIR` are deliberately left untranslated. Terminology worth a review before the board sees it: **Tropical Proof Hub → *Hub Tropical de Validación***, *proof-at-scale → validación a escala*, *the open role → el rol por ocupar*, *hard-tech anchor → ancla tecnológica*, *farmer-ready → listo para el productor*, *Board of Trustees → Junta de Fideicomisarios*.
+
 ### Controls
 
 | Action | How |
