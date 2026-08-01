@@ -30,18 +30,36 @@ Strategic positioning materials for the Zamorano University (Escuela Agrícola P
 
 Open `index.html` directly in a browser, or publish it with **GitHub Pages** (Settings → Pages → deploy from the `main` branch, root folder). The deck scales to any screen and needs no network access.
 
+It opens as an application rather than a bare slideshow: a left rail lists all 17 slides grouped by the three-act spine, the top bar shows where you are, and the deck itself sits in the main pane.
+
+### Views
+
+| View | What it's for |
+|------|---------------|
+| **Slides** (default) | The presentation, scaled to the window |
+| **Read** (`R`) | The whole deck as a scrollable document — the same content in continuous prose. Opens automatically on phones, where a scaled 1280×720 stage would be unreadable |
+| **Present** (`P`) | Hides the rail and top bar for a clean projected view; entering fullscreen switches to it automatically |
+| **All slides** (`O`) | Every slide as a card, grouped by act — click to jump |
+
 ### Controls
 
 | Action | How |
 |--------|-----|
 | Next / previous slide | `→` `←` · `Space` · `PageUp` / `PageDown` · on-screen arrows · click the slide · swipe on touch |
-| All slides at a glance | `O`, or click the slide counter — then click any slide to jump there |
-| Close the overview | `Esc` |
-| First / last slide | `Home` / `End` |
+| Jump to any slide | The left rail, the segmented bar in the top-right, or the **All slides** overview |
+| Reading view | `R` |
+| Present mode | `P` |
 | Fullscreen | `F`, or the ⛶ button |
+| First / last slide | `Home` / `End` |
+| All shortcuts | `?` |
+| Close any panel | `Esc` |
 | Link to one slide | Add the slide number to the URL, e.g. `…/index.html#9` |
 
 On slide 09, the five pillar tiles are clickable — each opens its detail slide (10–14). Hovering any tile lifts it and lets its neighbours recede. Motion is disabled automatically for viewers with *reduce motion* enabled in their OS.
+
+### PDF
+
+`Cmd/Ctrl-P` prints the full deck — all 17 slides, one per landscape page, chrome removed. Use it to produce a PDF for circulation; unlike the `.pptx`, it can't drift from the HTML.
 
 ## Provenance
 

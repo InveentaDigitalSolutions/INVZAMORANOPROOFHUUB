@@ -14,7 +14,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%;background:#05140E;font-family:var(--sans);-webkit-font-smoothing:antialiased}
-  #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  #stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
   #scaler{width:1280px;height:720px;position:relative;transform-origin:center center}
   .slide{position:absolute;inset:0;width:1280px;height:720px;display:none;padding:68px 72px;overflow:hidden}
   .slide.active{display:block}
@@ -116,14 +116,77 @@
   .tcard h4{font-family:var(--serif);color:#fff;font-size:17px;margin-bottom:8px}
   .tcard p{font-size:13px;color:#C7D6BE;line-height:1.4}
 
-  /* nav */
-  #nav{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;
-    background:rgba(9,41,31,.82);padding:8px 16px;border-radius:24px;z-index:50;backdrop-filter:blur(6px)}
-  #nav button{background:none;border:none;color:#C7D6BE;font-size:18px;cursor:pointer;padding:2px 8px;line-height:1}
-  #nav button:hover{color:#fff}
+  /* ——————————————— app shell ——————————————— */
+  #app{position:fixed;inset:0;display:grid;grid-template-columns:252px 1fr;background:#05140E}
+  #main{position:relative;display:flex;flex-direction:column;min-width:0}
+
+  /* left rail */
+  #rail{background:var(--dark2);border-right:1px solid #12402F;display:flex;flex-direction:column;
+    min-height:0;transition:margin-left .32s cubic-bezier(.22,.61,.36,1)}
+  .rail-top{padding:24px 22px 18px;border-bottom:1px solid #12402F}
+  .rail-top .brand{width:96px;height:20px;display:block;margin-bottom:16px}
+  .rail-title{font-family:var(--serif);color:#fff;font-size:17px;line-height:1.25;font-weight:700}
+  .rail-sub{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#6E8A7B;margin-top:7px}
+  #secnav{flex:1;overflow-y:auto;padding:14px 12px}
+  #secnav::-webkit-scrollbar{width:6px}
+  #secnav::-webkit-scrollbar-thumb{background:#1B4E3B;border-radius:3px}
+  .act{margin-bottom:6px}
+  .act-h{display:flex;align-items:center;gap:9px;width:100%;background:none;border:none;cursor:pointer;
+    padding:9px 10px;border-radius:8px;text-align:left;font-family:var(--sans);
+    font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#8FBF3F;
+    transition:background-color .2s,color .2s}
+  .act-h:hover{background:#0F3527}
+  .act-h .caret{margin-left:auto;font-size:9px;color:#5F7D6C;transition:transform .25s}
+  .act.shut .caret{transform:rotate(-90deg)}
+  .act.shut .act-list{display:none}
+  .act-list{padding:2px 0 8px}
+  .navitem{display:flex;gap:11px;align-items:baseline;width:100%;background:none;border:none;cursor:pointer;
+    padding:8px 10px 8px 12px;border-radius:8px;text-align:left;font-family:var(--sans);font-size:12.5px;
+    line-height:1.35;color:#A9BEB0;border-left:2px solid transparent;
+    transition:background-color .2s,color .2s,border-color .2s,padding-left .2s}
+  .navitem:hover{background:#0F3527;color:#fff;padding-left:15px}
+  .navitem .n{font-size:10px;font-weight:700;letter-spacing:1px;color:#5F7D6C;flex:none;min-width:16px}
+  .navitem.now{background:#123F2E;color:#fff;border-left-color:var(--lime)}
+  .navitem.now .n{color:var(--lime)}
+  .rail-foot{border-top:1px solid #12402F;padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rbtn{background:#0F3527;border:1px solid #1B4E3B;color:#C7D6BE;border-radius:8px;padding:9px 8px;
+    font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.8px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    transition:background-color .2s,border-color .2s,color .2s,transform .2s}
+  .rbtn:hover{background:#154331;border-color:var(--lime);color:#fff;transform:translateY(-1px)}
+  .rbtn.on{background:var(--lime);border-color:var(--lime);color:var(--dark)}
+
+  /* top bar */
+  #topbar{display:flex;align-items:center;gap:16px;padding:0 22px;height:52px;flex:none;
+    border-bottom:1px solid #12402F;background:var(--dark2)}
+  #crumb{display:flex;align-items:center;gap:10px;min-width:0;font-size:12px;color:#8FA79A}
+  #crumb .ct{color:#fff;font-family:var(--serif);font-size:14.5px;font-weight:700;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #crumb .cs{color:var(--lime);font-size:10px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;flex:none}
+  #crumb .cd{color:#2C5A47;flex:none}
+  #bar{margin-left:auto;display:flex;gap:3px;flex:none}
+  #bar i{width:16px;height:3px;border-radius:2px;background:#1E5340;cursor:pointer;transition:background-color .25s}
+  #bar i.done{background:#2F7D5C}
+  #bar i.now{background:var(--lime)}
+  #bar i:hover{background:#8FBF3F}
+  #stagewrap{position:relative;flex:1;min-height:0}
+
+  /* bottom nav */
+  #nav{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;
+    background:rgba(9,41,31,.86);padding:8px 16px;border-radius:24px;z-index:50;backdrop-filter:blur(6px);
+    border:1px solid #1B4E3B}
+  #nav button{background:none;border:none;color:#C7D6BE;font-size:18px;cursor:pointer;padding:2px 8px;line-height:1;
+    border-radius:8px;transition:color .2s,background-color .2s}
+  #nav button:hover{color:#fff;background:#154331}
   #count{color:#C7D6BE;font-size:12px;letter-spacing:1px;min-width:54px;text-align:center;font-family:var(--sans)}
-  .hint{position:fixed;top:14px;left:50%;transform:translateX(-50%);color:#5c7a6a;font-size:11px;z-index:50;
-    letter-spacing:.5px;transition:opacity .5s}
+  .hint{position:absolute;top:14px;left:50%;transform:translateX(-50%);color:#5c7a6a;font-size:11px;z-index:50;
+    letter-spacing:.5px;transition:opacity .5s;pointer-events:none}
+
+  /* present mode — chrome out of the way */
+  body.present #rail,body.present #topbar{display:none}
+  body.present #app{grid-template-columns:1fr}
+  body.present #nav{opacity:0;transition:opacity .3s}
+  body.present #main:hover #nav{opacity:1}
 
   /* ——— slide transitions ——— */
   @keyframes slideIn{from{opacity:0;transform:translate3d(34px,0,0)}to{opacity:1;transform:none}}
@@ -133,6 +196,7 @@
   @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
   .slide.active{animation:slideIn .46s cubic-bezier(.22,.61,.36,1) both}
+  .slide.active.midv{display:flex;flex-direction:column;justify-content:center}   /* balance tall slides */
   .slide.active.rev{animation-name:slideInBack}
   .slide.active .ease{animation:rise .52s cubic-bezier(.22,.61,.36,1) both;
     animation-delay:calc(var(--i,0)*55ms + 110ms)}
@@ -183,6 +247,86 @@
   .thumb .tn{font-size:10px;letter-spacing:2px;color:var(--lime);font-weight:700}
   .thumb .tt{font-family:var(--serif);color:#fff;font-size:14px;line-height:1.32;margin-top:8px}
 
+  #grid .gact{font-size:10px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--lime);
+    margin:26px 0 12px;display:flex;align-items:center;gap:12px}
+  #grid .gact::after{content:'';flex:1;height:1px;background:#1B4E3B}
+  #grid .gact:first-of-type{margin-top:0}
+
+  /* ——— reading view (also the small-screen fallback) ——— */
+  #read{position:absolute;inset:0;overflow-y:auto;display:none;background:#F7F9F5;padding:0 0 90px}
+  body.read #read{display:block}
+  body.read #stage{visibility:hidden}
+  body.read #nav,body.read .hint{display:none}
+  .rd-hero{background:var(--dark);color:#fff;padding:44px 34px 38px}
+  .rd-hero .eyebrow{color:var(--lime)}
+  .rd-hero h1{font-family:var(--serif);font-size:27px;line-height:1.18;margin:12px 0 10px}
+  .rd-hero p{color:#C7D6BE;font-style:italic;font-size:15px;line-height:1.5}
+  .rd-wrap{max-width:760px;margin:0 auto;padding:0 24px}
+  .rd-sec{padding:34px 0;border-bottom:1px solid var(--line)}
+  .rd-sec:last-child{border-bottom:none}
+  .rd-n{font-size:10px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--green)}
+  .rd-sec h2{font-family:var(--serif);font-size:23px;color:var(--dark);line-height:1.22;margin:10px 0 10px}
+  .rd-lead{font-size:15.5px;color:var(--muted);font-style:italic;line-height:1.55;margin-bottom:20px}
+  .rd-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:17px 19px;margin-bottom:12px}
+  .rd-item h3{font-family:var(--serif);font-size:16.5px;color:var(--dark);margin-bottom:7px}
+  .rd-item p{font-size:14.5px;color:var(--ink);line-height:1.6}
+  .rd-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .rd-tags span{background:var(--tint2);border-radius:16px;padding:6px 13px;font-size:12px;
+    font-weight:700;color:var(--dark)}
+
+  /* ——— help ——— */
+  #help{position:absolute;inset:0;z-index:80;display:none;align-items:center;justify-content:center;
+    background:rgba(5,20,14,.78);backdrop-filter:blur(4px);padding:24px}
+  #help.on{display:flex;animation:fadeIn .2s both}
+  .helpcard{background:var(--dark2);border:1px solid #1B4E3B;border-radius:16px;padding:30px 34px;max-width:470px;width:100%}
+  .helpcard h3{font-family:var(--serif);color:#fff;font-size:20px;margin-bottom:20px}
+  .helprow{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:9px 0;
+    border-bottom:1px solid #12402F;font-size:13px;color:#C7D6BE}
+  .helprow:last-of-type{border-bottom:none}
+  .helprow kbd{background:#0F3527;border:1px solid #1B4E3B;border-radius:6px;padding:4px 9px;
+    font-family:var(--sans);font-size:11px;font-weight:700;color:#fff;white-space:nowrap}
+
+  /* ——— responsive: rail collapses, reading view takes over on phones ——— */
+  @media (max-width:1080px){
+    /* the rail leaves the grid flow here, so #main must own the only column */
+    #app{grid-template-columns:1fr}
+    #rail{position:fixed;top:0;bottom:0;left:0;width:252px;z-index:75;margin-left:-252px;box-shadow:0 0 40px rgba(0,0,0,.5)}
+    body.railopen #rail{margin-left:0}
+    #menu{display:inline-flex!important}
+  }
+  @media (max-width:760px){
+    #topbar{padding:0 14px}
+    #crumb .ct{font-size:13px}
+    #bar{display:none}
+    .rd-hero{padding:32px 22px 28px}
+    .rd-hero h1{font-size:23px}
+    .rd-wrap{padding:0 18px}
+    #nav{bottom:12px}
+  }
+  #menu{display:none;background:none;border:none;color:#C7D6BE;font-size:17px;cursor:pointer;
+    padding:6px 8px;border-radius:8px;transition:background-color .2s,color .2s}
+  #menu:hover{background:#154331;color:#fff}
+  #scrim{position:fixed;inset:0;background:rgba(5,20,14,.6);z-index:74;display:none}
+  body.railopen #scrim{display:block}
+
+  /* ——— print: the whole deck, one slide per page ——— */
+  @media print{
+    @page{size:1280px 720px;margin:0}
+    html,body{background:#fff;height:auto}
+    #rail,#topbar,#nav,#grid,#help,.hint,#scrim,#read{display:none!important}
+    #app{position:static;display:block}
+    #main{display:block}
+    #stagewrap{position:static}
+    #stage{position:static;display:block;overflow:visible}
+    #scaler{transform:none!important;width:1280px;height:auto}
+    .slide{position:relative!important;display:block!important;width:1280px;height:720px;
+      page-break-after:always;break-after:page;animation:none!important;opacity:1!important}
+    .slide:last-child{page-break-after:auto;break-after:auto}
+    .slide .ease{animation:none!important;opacity:1!important;transform:none!important}
+    .slide.dark{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0ms!important;
       transition-duration:.001ms!important}
@@ -192,19 +336,63 @@
 </head>
 <body>
 <div id="prog"></div>
-<div id="stage"><div id="scaler"></div></div>
-<div class="hint" id="hint">← / → to navigate &nbsp;·&nbsp; O for all slides &nbsp;·&nbsp; F for fullscreen</div>
-<div id="nav">
-  <button id="prev" aria-label="Previous slide">‹</button>
-  <span id="count" role="button" tabindex="0" title="All slides (O)">01 / 17</span>
-  <button id="next" aria-label="Next slide">›</button>
-  <span class="sep"></span>
-  <button id="fs" class="tool" aria-label="Toggle fullscreen" title="Fullscreen (F)">⛶</button>
-</div>
-<div id="grid" aria-hidden="true">
-  <h2>All slides</h2>
-  <div class="gsub">Click any slide to jump · Esc to close</div>
-  <div id="gg"></div>
+<div id="scrim"></div>
+<div id="app">
+  <aside id="rail">
+    <div class="rail-top">
+      <span class="brand l" role="img" aria-label="inveenta"></span>
+      <div class="rail-title">The Tropical Proof Hub</div>
+      <div class="rail-sub">Board of Trustees · 2026</div>
+    </div>
+    <nav id="secnav" aria-label="Slides"></nav>
+    <div class="rail-foot">
+      <button class="rbtn" id="btnGrid" title="All slides (O)">▦ &nbsp;Slides</button>
+      <button class="rbtn" id="btnRead" title="Reading view (R)">☰ &nbsp;Read</button>
+      <button class="rbtn" id="btnPresent" title="Present mode (P)">▶ &nbsp;Present</button>
+      <button class="rbtn" id="btnHelp" title="Shortcuts (?)">? &nbsp;Help</button>
+    </div>
+  </aside>
+
+  <div id="main">
+    <header id="topbar">
+      <button id="menu" aria-label="Open slide menu">☰</button>
+      <div id="crumb"><span class="cs"></span><span class="cd">/</span><span class="ct"></span></div>
+      <div id="bar" role="tablist" aria-label="Jump to slide"></div>
+    </header>
+
+    <div id="stagewrap">
+      <div id="stage"><div id="scaler"></div></div>
+      <div id="read"></div>
+      <div class="hint" id="hint">← / → to navigate &nbsp;·&nbsp; ? for shortcuts</div>
+      <div id="nav">
+        <button id="prev" aria-label="Previous slide">‹</button>
+        <span id="count" role="button" tabindex="0" title="All slides (O)" aria-live="polite">01 / 17</span>
+        <button id="next" aria-label="Next slide">›</button>
+        <span class="sep"></span>
+        <button id="fs" class="tool" aria-label="Toggle fullscreen" title="Fullscreen (F)">⛶</button>
+      </div>
+
+      <div id="grid" aria-hidden="true">
+        <h2>All slides</h2>
+        <div class="gsub">Click any slide to jump · Esc to close</div>
+        <div id="gg"></div>
+      </div>
+
+      <div id="help" aria-hidden="true">
+        <div class="helpcard">
+          <h3>Keyboard &amp; controls</h3>
+          <div class="helprow"><span>Next / previous slide</span><span><kbd>→</kbd> <kbd>←</kbd> <kbd>Space</kbd></span></div>
+          <div class="helprow"><span>All slides</span><span><kbd>O</kbd></span></div>
+          <div class="helprow"><span>Reading view</span><span><kbd>R</kbd></span></div>
+          <div class="helprow"><span>Present mode (hide chrome)</span><span><kbd>P</kbd></span></div>
+          <div class="helprow"><span>Fullscreen</span><span><kbd>F</kbd></span></div>
+          <div class="helprow"><span>First / last slide</span><span><kbd>Home</kbd> <kbd>End</kbd></span></div>
+          <div class="helprow"><span>Close any panel</span><span><kbd>Esc</kbd></span></div>
+          <div class="helprow"><span>Link to one slide</span><span><kbd>…/index.html#9</kbd></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -372,7 +560,7 @@ S.push(`<section class="slide light">
 </section>`);
 
 /* 8 — HUB DIAGRAM */
-S.push(`<section class="slide dark">
+S.push(`<section class="slide dark midv">
   <div class="eyebrow l">The strategic position</div>
   <h1 class="title" style="font-size:34px">The Tropical Proof Hub</h1>
   <div class="sub" style="color:#C7D6BE">Zamorano does not replicate frontier discovery — it validates, adapts and transfers it at scale.</div>
@@ -501,7 +689,7 @@ S.push(`<section class="slide light">
 /* 17 — CLOSING */
 const traj=[['Adoption','more validated practices put to work'],['Nutrition & safety','protected under climate stress'],
   ['Efficiency','improved resource-use per output'],['Traceability','full MRV/QA with independent verification']];
-S.push(`<section class="slide dark">
+S.push(`<section class="slide dark midv">
   <div class="eyebrow l">The holistic view</div>
   <div style="font-family:var(--serif);font-size:28px;font-weight:700;color:#9FB394;margin-top:22px">Zamorano is not a research institute.</div>
   <div style="font-family:var(--serif);font-size:36px;font-weight:700;color:#fff;line-height:1.22;margin:14px 0 30px;max-width:1080px">It is the tropical validation platform where global science is tested, proven, and translated into practice at scale.</div>
@@ -526,19 +714,112 @@ const EASE='.eyebrow,h1.title,.sub,.t-title,.t-sub,.tagline,.card,.mini,.hubbox,
 slides.forEach(s=>[...s.querySelectorAll(EASE)]
   .forEach((el,i)=>{el.classList.add('ease');el.style.setProperty('--i',Math.min(i,9));}));
 
-/* overview grid, built from each slide's own heading */
 const titleOf=s=>{
   const el=s.querySelector('h1.title,.t-title');
   const t=el?el.innerHTML.replace(/<br\s*\/?>/gi,' ').replace(/<[^>]+>/g,'').trim():'';
   return t||((s.querySelector('.eyebrow')||{}).textContent||'Slide').trim();
 };
-slides.forEach((s,i)=>{
-  const t=document.createElement('button');
-  t.className='thumb';t.dataset.i=i;
-  t.innerHTML=`<div class="tn">${pad(i+1)}</div><div class="tt">${titleOf(s)}</div>`;
-  gg.appendChild(t);
+const leadOf=s=>((s.querySelector('.sub,.t-sub')||{}).textContent||'').trim();
+const titles=slides.map(titleOf);
+
+/* the three-act spine (docs/00-strategic-narrative.md), plus the opening */
+const ACTS=[
+  {name:'Opening',        from:1,  to:1},
+  {name:'Act 1 · The shift',      from:2,  to:5},
+  {name:'Act 2 · The open role',  from:6,  to:8},
+  {name:'Act 3 · Already underway',from:9, to:17}
+];
+const actOf=n=>ACTS.find(a=>n>=a.from&&n<=a.to)||ACTS[0];
+
+/* ——— left rail: acts → slides ——— */
+const secnav=document.getElementById('secnav');
+ACTS.forEach((a,ai)=>{
+  const wrap=document.createElement('div');
+  wrap.className='act';
+  const items=[];
+  for(let n=a.from;n<=a.to;n++)
+    items.push(`<button class="navitem" data-i="${n-1}"><span class="n">${pad(n)}</span><span>${titles[n-1]}</span></button>`);
+  wrap.innerHTML=`<button class="act-h" data-act="${ai}">${a.name}<span class="caret">▼</span></button>
+    <div class="act-list">${items.join('')}</div>`;
+  secnav.appendChild(wrap);
 });
-const thumbs=[...gg.children];
+const navitems=[...secnav.querySelectorAll('.navitem')];
+secnav.addEventListener('click',e=>{
+  const h=e.target.closest('.act-h');
+  if(h){h.parentElement.classList.toggle('shut');return;}
+  const it=e.target.closest('.navitem');
+  if(it){show(+it.dataset.i);closeRail();}
+});
+
+/* ——— top bar: crumb + segmented progress ——— */
+const bar=document.getElementById('bar'),crumb=document.getElementById('crumb');
+slides.forEach((s,i)=>{
+  const seg=document.createElement('i');
+  seg.dataset.i=i;seg.title=pad(i+1)+' · '+titles[i];
+  bar.appendChild(seg);
+});
+bar.addEventListener('click',e=>{if(e.target.dataset.i!==undefined)show(+e.target.dataset.i);});
+const segs=[...bar.children];
+
+/* ——— overview, grouped by act ——— */
+ACTS.forEach(a=>{
+  const h=document.createElement('div');
+  h.className='gact';h.textContent=a.name;
+  gg.appendChild(h);
+  const row=document.createElement('div');
+  row.style.cssText='display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:16px';
+  for(let n=a.from;n<=a.to;n++){
+    const t=document.createElement('button');
+    t.className='thumb';t.dataset.i=n-1;
+    t.innerHTML=`<div class="tn">${pad(n)}</div><div class="tt">${titles[n-1]}</div>`;
+    row.appendChild(t);
+  }
+  gg.appendChild(row);
+});
+const thumbs=[...gg.querySelectorAll('.thumb')];
+
+/* ——— reading view: the deck's own text, laid out as a document ——— */
+(function buildRead(){
+  const read=document.getElementById('read');
+  const esc=x=>x.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  let html=`<div class="rd-hero">
+      <div class="eyebrow">${esc((slides[0].querySelector('.eyebrow')||{}).textContent||'')}</div>
+      <h1>${esc(titles[0])}</h1><p>${esc(leadOf(slides[0]))}</p></div><div class="rd-wrap">`;
+  slides.forEach((s,i)=>{
+    if(i===0)return;
+    const items=[...s.querySelectorAll('.mini,.card,.tcard,.hubbox,.row')].map(el=>{
+      /* heading: a real heading, else the KPI figure + its label, else the small caps label */
+      const h=el.querySelector('h3,h4');
+      const big=el.querySelector('.big'), lab=el.querySelector('.lab');
+      const head=h?h.textContent.trim()
+        :big?[big,lab].filter(Boolean).map(x=>x.textContent.trim()).join(' · ')
+        :(el.querySelector('.klabel')||{textContent:''}).textContent.trim();
+      /* body: every leaf block, so cards built from <div>s aren't silently dropped */
+      const skip='h3,h4,.big,.lab,.klabel';
+      const INLINE=/^(SPAN|B|I|EM|STRONG|A|BR)$/;
+      const lines=[];
+      (function walk(n){
+        [...n.children].forEach(c=>{
+          if(c.matches(skip)||!c.textContent.trim())return;
+          const blocks=[...c.children].filter(k=>!INLINE.test(k.tagName)&&k.textContent.trim());
+          if(blocks.length)walk(c);
+          else{const t=c.textContent.replace(/\s+/g,' ').trim();if(t&&t!==head)lines.push(t);}
+        });
+      })(el);
+      if(!head&&!lines.length)return '';
+      return `<div class="rd-item">${head?`<h3>${esc(head)}</h3>`:''}`+
+             lines.map(t=>`<p>${esc(t)}</p>`).join('')+`</div>`;
+    }).join('');
+    const chips=[...s.querySelectorAll('.chip')].map(c=>`<span>${esc(c.textContent.trim())}</span>`).join('');
+    html+=`<section class="rd-sec" id="rd${i+1}">
+      <div class="rd-n">${pad(i+1)} · ${esc((s.querySelector('.eyebrow')||{}).textContent||actOf(i+1).name)}</div>
+      <h2>${esc(titles[i])}</h2>
+      ${leadOf(s)?`<div class="rd-lead">${esc(leadOf(s))}</div>`:''}
+      ${chips?`<div class="rd-tags">${chips}</div>`:''}
+      ${items}</section>`;
+  });
+  read.innerHTML=html+'</div>';
+})();
 
 function show(i,back){
   const n=(i+slides.length)%slides.length;
@@ -547,24 +828,56 @@ function show(i,back){
   slides.forEach((s,k)=>{s.classList.toggle('rev',k===n&&back);s.classList.toggle('active',k===n);});
   count.textContent=pad(n+1)+' / '+pad(slides.length);
   prog.style.width=((n+1)/slides.length*100)+'%';
-  thumbs.forEach((t,k)=>t.classList.toggle('now',k===n));
+  thumbs.forEach(t=>t.classList.toggle('now',+t.dataset.i===n));
+  navitems.forEach(t=>t.classList.toggle('now',+t.dataset.i===n));
+  segs.forEach((s,k)=>{s.classList.toggle('now',k===n);s.classList.toggle('done',k<n);});
+  const a=actOf(n+1);
+  crumb.querySelector('.cs').textContent=a.name;
+  crumb.querySelector('.ct').textContent=titles[n];
+  const it=navitems[n]; if(it&&it.closest('.act').classList.contains('shut'))it.closest('.act').classList.remove('shut');
+  if(it)it.scrollIntoView({block:'nearest'});
+  if(document.body.classList.contains('read')){
+    const t=document.getElementById('rd'+(n+1));
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+  }
   if(location.hash!=='#'+(n+1)){hashLock=true;location.hash='#'+(n+1);}
 }
 const next=()=>show(cur+1,false), prev=()=>show(cur-1,true);
 
-/* overview */
-function overview(on){
-  grid.classList.toggle('on',on);
-  grid.setAttribute('aria-hidden',String(!on));
+/* ——— panels & modes ——— */
+const help=document.getElementById('help');
+function overview(on){grid.classList.toggle('on',on);grid.setAttribute('aria-hidden',String(!on));}
+function helper(on){help.classList.toggle('on',on);help.setAttribute('aria-hidden',String(!on));}
+function closeAll(){overview(false);helper(false);closeRail();}
+function closeRail(){document.body.classList.remove('railopen');}
+
+function readMode(on){
+  document.body.classList.toggle('read',on);
+  document.getElementById('btnRead').classList.toggle('on',on);
+  if(on){const t=document.getElementById('rd'+(cur+1));if(t)t.scrollIntoView({block:'start'});}
 }
+function present(on){
+  document.body.classList.toggle('present',on);
+  document.getElementById('btnPresent').classList.toggle('on',on);
+  fit();
+}
+
 count.onclick=()=>overview(!grid.classList.contains('on'));
 count.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();count.onclick();}};
 gg.onclick=e=>{const t=e.target.closest('.thumb');if(t){overview(false);show(+t.dataset.i);}};
+help.onclick=e=>{if(e.target===help)helper(false);};
+document.getElementById('scrim').onclick=closeRail;
+document.getElementById('menu').onclick=()=>document.body.classList.toggle('railopen');
+document.getElementById('btnGrid').onclick=()=>overview(!grid.classList.contains('on'));
+document.getElementById('btnHelp').onclick=()=>helper(!help.classList.contains('on'));
+document.getElementById('btnRead').onclick=()=>readMode(!document.body.classList.contains('read'));
+document.getElementById('btnPresent').onclick=()=>present(!document.body.classList.contains('present'));
 
-/* fullscreen */
+/* fullscreen — also enters present mode, and leaves it on exit */
 const fs=document.getElementById('fs');
 fs.onclick=()=>{document.fullscreenElement?document.exitFullscreen():
   document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();};
+addEventListener('fullscreenchange',()=>present(!!document.fullscreenElement));
 
 document.getElementById('next').onclick=next;
 document.getElementById('prev').onclick=prev;
@@ -581,12 +894,19 @@ scaler.addEventListener('keydown',e=>{
 });
 
 addEventListener('keydown',e=>{
-  if(grid.classList.contains('on')){if(e.key==='Escape'||e.key==='o'||e.key==='O')overview(false);return;}
-  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown')next();
-  else if(e.key==='ArrowLeft'||e.key==='PageUp')prev();
-  else if(e.key==='Home')show(0,true);else if(e.key==='End')show(slides.length-1,false);
-  else if(e.key==='o'||e.key==='O')overview(true);
-  else if(e.key==='f'||e.key==='F')fs.onclick();
+  const k=e.key, open=grid.classList.contains('on')||help.classList.contains('on')
+        ||document.body.classList.contains('railopen');
+  if(k==='Escape'){closeAll();return;}
+  if(open){if(k==='o'||k==='O')overview(false);if(k==='?')helper(false);return;}
+  if(k==='?'){helper(true);return;}
+  if(k==='o'||k==='O'){overview(true);return;}
+  if(k==='r'||k==='R'){readMode(!document.body.classList.contains('read'));return;}
+  if(k==='p'||k==='P'){present(!document.body.classList.contains('present'));return;}
+  if(k==='f'||k==='F'){fs.onclick();return;}
+  if(document.body.classList.contains('read'))return;      // reading view scrolls normally
+  if(k==='ArrowRight'||k===' '||k==='PageDown')next();
+  else if(k==='ArrowLeft'||k==='PageUp')prev();
+  else if(k==='Home')show(0,true);else if(k==='End')show(slides.length-1,false);
 });
 
 /* swipe */
@@ -605,10 +925,26 @@ addEventListener('hashchange',()=>{
   if(n>=1&&n<=slides.length)show(n-1);
 });
 
-function fit(){const s=Math.min(innerWidth/1280,innerHeight/720);scaler.style.transform='scale('+s+')';}
-addEventListener('resize',fit);fit();
+/* scale the 1280×720 stage into whatever space the shell leaves it */
+const wrap=document.getElementById('stagewrap');
+function fit(){
+  const w=wrap.clientWidth||innerWidth, h=wrap.clientHeight||innerHeight;
+  scaler.style.transform='scale('+Math.min(w/1280,h/720)+')';
+}
+addEventListener('resize',()=>{fit();autoRead();});
+
+/* a scaled 1280px stage is unreadable on a phone — open the reading view instead */
+let readForced=false;
+function autoRead(){
+  const small=innerWidth<760;
+  if(small&&!document.body.classList.contains('read')){readMode(true);readForced=true;}
+  else if(!small&&readForced){readMode(false);readForced=false;}
+}
+
+fit();
 const start=parseInt(location.hash.slice(1),10);
 show(start>=1&&start<=slides.length?start-1:0,false);
+autoRead();
 setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity='0';},5000);
 </script>
 </body>
