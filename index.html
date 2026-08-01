@@ -80,6 +80,8 @@
   .stat.dark .big{color:var(--lime)}
   .stat .lab{font-size:12px;font-weight:700;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin:10px 0 12px}
   .stat.dark .lab{color:#C7D6BE}
+  .stat .lab.solo{font-family:var(--serif);font-size:19px;font-weight:700;color:var(--dark);
+    text-transform:none;letter-spacing:0;margin:0 0 14px;line-height:1.25}
   .stat .desc{font-size:13px;color:var(--ink);line-height:1.5;border-top:1px solid var(--line);padding-top:12px}
   .stat.dark .desc{color:#DCE7D3;border-top:1px solid var(--green)}
 
@@ -109,6 +111,20 @@
   .pill{background:var(--dark);border-radius:20px;padding:9px 0;text-align:center;font-size:12px;font-weight:700}
   .row h4{font-family:var(--serif);font-size:17px;color:var(--dark)}
   .row p{font-size:13px;color:var(--ink);line-height:1.45}
+
+  /* how it operates */
+  .stages{display:flex;align-items:stretch;gap:14px;margin-top:28px}
+  .stage{flex:1;background:var(--tint);border-radius:12px;padding:18px 20px;
+    transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s}
+  .stage:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(10,31,23,.18)}
+  .stage .sn{font-family:var(--serif);font-size:14px;font-weight:700;color:var(--green);margin-bottom:8px}
+  .stage h4{font-family:var(--serif);font-size:17px;color:var(--dark);margin-bottom:7px}
+  .stage p{font-size:12.5px;color:var(--ink);line-height:1.45}
+  .stages .chev{align-self:center;flex:none}
+  .metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:14px}
+  .metric b{display:block;font-size:12.5px;color:var(--dark);margin-bottom:5px}
+  .metric span{font-size:11.5px;color:var(--muted);line-height:1.4;display:block}
+  .srcline{font-size:11px;color:var(--muted);margin-top:10px;font-style:normal}
 
   /* closing — the decision slide */
   .close .neg{font-family:var(--serif);font-size:23px;font-weight:700;color:#7E9A8A;line-height:1.35;
@@ -216,6 +232,7 @@
   @keyframes slideIn{from{opacity:0;transform:translate3d(34px,0,0)}to{opacity:1;transform:none}}
   @keyframes slideInBack{from{opacity:0;transform:translate3d(-34px,0,0)}to{opacity:1;transform:none}}
   @keyframes rise{from{opacity:0;transform:translate3d(0,18px,0)}to{opacity:1;transform:none}}
+  @keyframes fall{from{opacity:0;transform:translate3d(0,-18px,0)}to{opacity:1;transform:none}}
   @keyframes riseScaled{from{opacity:0;transform:scale(1.06) translate3d(0,18px,0)}to{opacity:1;transform:scale(1.06)}}
   @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
@@ -224,6 +241,7 @@
   .slide.active.rev{animation-name:slideInBack}
   .slide.active .ease{animation:rise .52s cubic-bezier(.22,.61,.36,1) both;
     animation-delay:calc(var(--i,0)*55ms + 110ms)}
+  .slide.active.rev .ease{animation-name:fall}          /* going back, content falls in */
   .slide.active .hubbox.center.ease{animation-name:riseScaled}
   .slide.active .footer,.slide.active .corner,.slide.active .prepared{animation:fadeIn .7s .45s both}
 
@@ -258,18 +276,34 @@
   #nav .tool{font-size:13px!important;opacity:.75}
   #nav .sep{width:1px;height:16px;background:#2C5A47}
 
-  #grid{position:fixed;inset:0;z-index:70;display:none;padding:44px 54px;overflow:auto;
+  #grid{position:fixed;inset:0;z-index:70;display:block;padding:44px 54px;overflow:auto;
+    visibility:hidden;opacity:0;pointer-events:none;transition:opacity .24s ease,visibility .24s;
     background:rgba(5,20,14,.95);backdrop-filter:blur(5px)}
-  #grid.on{display:block;animation:fadeIn .22s both}
+  #grid.on{visibility:visible;opacity:1;pointer-events:auto}
   #grid h2{font-family:var(--serif);color:#fff;font-size:21px;font-weight:700}
   #grid .gsub{color:#7C9184;font-size:11px;letter-spacing:2.4px;text-transform:uppercase;margin:6px 0 26px}
-  #gg{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:16px}
+  #gg{display:block}   /* act headers + their rows stack; each row is its own grid */
   .thumb{background:var(--dark);border:1px solid #1E5340;border-radius:10px;padding:15px 16px;cursor:pointer;
     text-align:left;font-family:var(--sans);transition:transform .25s,border-color .25s,background-color .25s}
   .thumb:hover{transform:translateY(-4px);border-color:var(--lime);background:var(--dark2)}
   .thumb.now{border-color:var(--lime);background:var(--dark2)}
   .thumb .tn{font-size:10px;letter-spacing:2px;color:var(--lime);font-weight:700}
   .thumb .tt{font-family:var(--serif);color:#fff;font-size:14px;line-height:1.32;margin-top:8px}
+  /* live slide miniatures */
+  .thumbshot{position:relative;width:100%;padding-top:56.25%;overflow:hidden;border-radius:7px;
+    margin-bottom:12px;background:#0B2A1F;border:1px solid #143D2E}
+  .thumbshot .slide{position:absolute!important;top:0;left:0;display:block!important;
+    animation:none!important;transform-origin:top left;pointer-events:none}
+  .thumbshot .slide .ease{animation:none!important;opacity:1!important;transform:none!important}
+  .thumbshot .footer,.thumbshot .corner,.thumbshot .prepared{display:none}
+
+  /* present mode keeps a quiet position indicator */
+  #pcount{position:absolute;right:24px;top:16px;z-index:40;display:none;
+    font-size:11px;letter-spacing:2.5px;color:#4E6B5C}
+  body.present #pcount{display:block}
+
+  /* language / view cross-fades */
+  #scaler{transition:opacity .17s ease}
 
   #grid .gact{font-size:10px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--lime);
     margin:26px 0 12px;display:flex;align-items:center;gap:12px}
@@ -277,8 +311,9 @@
   #grid .gact:first-of-type{margin-top:0}
 
   /* ——— reading view (also the small-screen fallback) ——— */
-  #read{position:absolute;inset:0;overflow-y:auto;display:none;background:#F7F9F5;padding:0 0 90px}
-  body.read #read{display:block}
+  #read{position:absolute;inset:0;overflow-y:auto;display:block;background:#F7F9F5;padding:0 0 90px;
+    visibility:hidden;opacity:0;pointer-events:none;transition:opacity .22s ease,visibility .22s}
+  body.read #read{visibility:visible;opacity:1;pointer-events:auto}
   body.read #stage{visibility:hidden}
   body.read #nav,body.read .hint{display:none}
   .rd-hero{background:var(--dark);color:#fff;padding:44px 34px 38px}
@@ -299,9 +334,10 @@
     font-weight:700;color:var(--dark)}
 
   /* ——— help ——— */
-  #help{position:absolute;inset:0;z-index:80;display:none;align-items:center;justify-content:center;
+  #help{position:absolute;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;
+    visibility:hidden;opacity:0;pointer-events:none;transition:opacity .2s ease,visibility .2s;
     background:rgba(5,20,14,.78);backdrop-filter:blur(4px);padding:24px}
-  #help.on{display:flex;animation:fadeIn .2s both}
+  #help.on{visibility:visible;opacity:1;pointer-events:auto}
   .helpcard{background:var(--dark2);border:1px solid #1B4E3B;border-radius:16px;padding:30px 34px;max-width:470px;width:100%}
   .helpcard h3{font-family:var(--serif);color:#fff;font-size:20px;margin-bottom:20px}
   .helprow{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:9px 0;
@@ -390,10 +426,11 @@
     <div id="stagewrap">
       <div id="stage"><div id="scaler"></div></div>
       <div id="read"></div>
+      <div id="pcount"></div>
       <div class="hint" id="hint">← / → to navigate &nbsp;·&nbsp; ? for shortcuts</div>
       <div id="nav">
         <button id="prev" aria-label="Previous slide">‹</button>
-        <span id="count" role="button" tabindex="0" title="All slides (O)" aria-live="polite">01 / 18</span>
+        <span id="count" role="button" tabindex="0" title="All slides (O)" aria-live="polite">01 / 20</span>
         <button id="next" aria-label="Next slide">›</button>
         <span class="sep"></span>
         <button id="fs" class="tool" aria-label="Toggle fullscreen" title="Fullscreen (F)">⛶</button>
@@ -501,6 +538,7 @@ S.push(`<section class="slide light">
     </div>
   </div>
   <p style="font-size:12.5px;color:var(--muted);font-style:italic;margin-top:24px">Rising CO₂ and temperatures cut protein and key micronutrients in staple crops — so performance must be validated, measured and reproduced under real conditions.</p>
+  <p class="srcline">Myers et al., <i>Nature</i> 2014 · Loladze, <i>eLife</i> 2014 · Zhao et al., <i>PNAS</i> 2017 · Mills et al., <i>Glob Change Biol</i> 2018 — full reference list in the knowledge base.</p>
   ${foot(3)}
 </section>`);
 
@@ -570,23 +608,47 @@ S.push(`<section class="slide light">
   ${foot(6)}
 </section>`);
 
-/* 7 — ADVANTAGE */
+/* 7 — REGIONAL BENCHMARK (docs/01 §6) */
+const region=[['CIMMYT · CIAT','Genetic resources','Deep germplasm development and breeding programs.'],
+  ['Embrapa · CGIAR','Tropical research capacity','Large-scale research generation across tropical systems.'],
+  ['CATIE','Regional experience','Long institutional presence; policy- and donor-framed programs.'],
+  ['EARTH','Educational outreach','Undergraduate formation and outreach across the region.']];
+S.push(`<section class="slide light midv">
+  <div class="eyebrow g">The regional picture</div>
+  <h1 class="title">Strong institutions — a different function</h1>
+  <div class="sub">The region is not empty. But each of these operates primarily as a research generator or a training centre.</div>
+  <div class="g4">
+    ${region.map(r=>`<div class="mini shadow">
+      <h3 style="font-size:17px">${r[0]}</h3>
+      <div class="klabel" style="color:var(--green);margin:10px 0 8px">${r[1]}</div>
+      <p>${r[2]}</p></div>`).join('')}
+  </div>
+  <div class="band dark shadow">
+    <div class="klabel" style="color:var(--lime);letter-spacing:2px">The complement none of them provides</div>
+    <p style="font-size:14.5px;color:#DCE7D3;line-height:1.55;margin-top:12px">Full-system validation under real farmer conditions. Zamorano's differentiation is <b style="color:#fff">operational</b>, not academic — which makes these institutions reference nodes and partners rather than competitors.</p>
+  </div>
+  ${foot(7)}
+</section>`);
+
+/* 8 — ADVANTAGE */
 const adv=[['4,000+','Hectares','A living agricultural system — not a research plot. Innovations are tested under real farm dynamics.',true],
-  ['Field','Farmer-ready','Validation under real production conditions, not discovery alone — closing the prototype-to-proof gap.',false],
-  ['Neutral','Pan-Latin ground','Non-governmental and regionally neutral — a trusted convening site for multinational validation.',false],
-  ['Student','To-field chain','An alumni network across every agro-ecological zone of Latin America — translation faster than any extension service.',false]];
+  [null,'Farmer-ready validation','Validation under real production conditions, not discovery alone — closing the prototype-to-proof gap.',false],
+  [null,'Pan-Latin neutrality','Non-governmental and regionally neutral — a trusted convening site for multinational validation.',false],
+  [null,'Student-to-field chain','An alumni network across every agro-ecological zone of Latin America — translation faster than any extension service.',false]];
 S.push(`<section class="slide light">
   <div class="eyebrow g">Comparative advantage</div>
   <h1 class="title">Zamorano is built to fill it</h1>
   <div class="sub">A living agricultural system where research, education, production and extension operate as one platform.</div>
   <div class="g4">
-    ${adv.map(a=>`<div class="card stat ${a[3]?'dark':''} ${a[3]?'shadow':''}" style="${a[3]?'background:var(--dark)':'background:var(--tint)'}">
-      <div class="big">${a[0]}</div><div class="lab">${a[1]}</div><div class="desc">${a[2]}</div></div>`).join('')}
+    ${adv.map(a=>`<div class="card stat ${a[3]?'dark shadow':''}" style="${a[3]?'background:var(--dark)':'background:var(--tint)'}">
+      ${a[0]?`<div class="big">${a[0]}</div><div class="lab">${a[1]}</div>`
+             :`<div class="lab solo">${a[1]}</div>`}
+      <div class="desc">${a[2]}</div></div>`).join('')}
   </div>
-  ${foot(7)}
+  ${foot(8)}
 </section>`);
 
-/* 8 — HUB DIAGRAM */
+/* 9 — HUB DIAGRAM */
 S.push(`<section class="slide dark midv">
   <div class="eyebrow l">The strategic position</div>
   <h1 class="title" style="font-size:34px">The Tropical Proof Hub</h1>
@@ -602,7 +664,7 @@ S.push(`<section class="slide dark midv">
   <span class="brand l corner" role="img" aria-label="inveenta"></span>
 </section>`);
 
-/* 9 — MISSION AS ARCHITECTURE */
+/* 10 — MISSION AS ARCHITECTURE */
 const pil=[['1','Discovery &<br>hard-tech anchor',['FZ Jülich (IBG-2 · JSC)','Univ. Bonn — Klein-Altendorf']],
   ['2','Mechanization &<br>soil systems',['CLAAS','LEMKEN']],
   ['3','Dairy<br>transformation',['GEA','Lely']],
@@ -613,17 +675,17 @@ S.push(`<section class="slide light">
   <h1 class="title">The mission was not a tour — it was an architecture</h1>
   <div class="sub">Each institution maps to a capability Zamorano needs. Together they form five pillars.</div>
   <div class="g5" style="margin-top:26px">
-    ${pil.map((p,i)=>`<div class="mini shadow jump" style="min-height:300px" data-goto="${9+i}"
+    ${pil.map((p,i)=>`<div class="mini shadow jump" style="min-height:300px" data-goto="${10+i}"
       role="button" tabindex="0" aria-label="Open the detail slide for pillar ${p[0]}">
       <span class="numnode" style="background:var(--dark);width:36px;height:36px;font-size:16px;font-family:var(--serif)">${p[0]}</span>
       <h3 style="font-size:15px;margin:14px 0 14px;line-height:1.25">${p[1]}</h3>
       ${p[2].map(i=>`<div style="background:#fff;border-radius:6px;padding:7px 10px;font-size:10.5px;color:var(--ink);margin-bottom:7px">${i}</div>`).join('')}
     </div>`).join('')}
   </div>
-  ${foot(9)}
+  ${foot(10)}
 </section>`);
 
-/* 10-14 PILLARS */
+/* 11-15 PILLARS */
 function pillar(num,n,tag,head,chips,cap,unlock,met){
   return `<section class="slide light">
     <div class="eyebrow g">${tag}</div>
@@ -646,33 +708,33 @@ function pillar(num,n,tag,head,chips,cap,unlock,met){
     ${foot(n)}
   </section>`;
 }
-S.push(pillar('1',10,'Pillar 1 · Discovery & hard-tech anchor','Access to frontier science, without owning it',
+S.push(pillar('1',11,'Pillar 1 · Discovery & hard-tech anchor','Access to frontier science, without owning it',
   ['Forschungszentrum Jülich — IBG-2','Jülich Supercomputing Centre','Univ. Bonn — Klein-Altendorf'],
   'Frontier plant phenotyping, AI and exascale modeling, bioeconomy and perennial-biomass science, and field-to-cloud research platforms — an integrated scientific ecosystem spanning discovery to field application.',
   'A discovery anchor Zamorano can translate into field-validated tropical systems — the science it accesses through partnership rather than replicates, with complementary tropical validation Jülich cannot perform.',
   'Prof. Uwe Rascher, Prof. Ulrich Schurr, Dr. Nikolai Jablonowski, Dr. Robert Koller (Jülich); Prof. Ralf Pude (Bonn).'));
-S.push(pillar('2',11,'Pillar 2 · Mechanization & soil systems','Machinery as part of the learning architecture',
+S.push(pillar('2',12,'Pillar 2 · Mechanization & soil systems','Machinery as part of the learning architecture',
   ['CLAAS — JAGUAR 930','LEMKEN — incl. Crop Care'],
   'System-level mechanization: machine–soil–crop interaction, controlled tillage and seedbed quality, precision and non-chemical crop care, and digital fleet management across large areas.',
   'Productive units run as teaching-integrated operations, with equipment chosen by agronomic objective rather than machine-by-machine. CLAAS has asked Zamorano to define its future equipment and training needs.',
   'Joerg Wesseimann, Global Product Team Manager – JAGUAR (CLAAS); Luisa Urbanowski, Market Development Manager (LEMKEN).'));
-S.push(pillar('3',12,'Pillar 3 · Dairy transformation','Two visions of advanced dairy, compared',
+S.push(pillar('3',13,'Pillar 3 · Dairy transformation','Two visions of advanced dairy, compared',
   ['GEA Farm Technologies','Lely'],
   'Complementary references for dairy modernization — GEA\'s conventional and rotary-carousel systems observed in commercial operation, and Lely\'s fully robotic, automated model — spanning herd monitoring, welfare and regenerative practice.',
   'A technically grounded modernization path for Zamorano\'s dairy, plus a partner for the training and workforce development that responsible adoption requires across Latin America. GEA and Lely quotations are in evaluation.',
   'Hao Shen and Esteban Romnero (GEA); Henk van Dongen, Director of Alternatives & Regenerative Agriculture (Lely).'));
-S.push(pillar('4',13,'Pillar 4 · Protected agriculture, seeds & markets','From genetics to greenhouse to global market',
+S.push(pillar('4',14,'Pillar 4 · Protected agriculture, seeds & markets','From genetics to greenhouse to global market',
   ['BASF Nunhems','Koppert Cress','World Horti Center','Royal FloraHolland','Brightlands'],
   'Greenhouse-based seed production, high-value specialty crops, controlled-environment technology, and market intelligence — value created through quality, differentiation and market access, not volume alone.',
   'A pathway to greenhouse and seed programs under tropical conditions, student mobility into leading horticultural environments, and a route connecting Zamorano\'s production to international markets.',
   'Prof. Dr. Jan van den Berg (BASF); Michelle Tanis (Koppert Cress); Dr. Onno Müller & Dr. Cyriel Mentink (Brightlands); Azzam Abdelshafi (Royal FloraHolland).'));
-S.push(pillar('5',14,'Pillar 5 · Energy–land integration & ecosystem models','Multi-output land; the networked campus',
+S.push(pillar('5',15,'Pillar 5 · Energy–land integration & ecosystem models','Multi-output land; the networked campus',
   ['Agri-Food-Energy Park','Agri-PV (Jülich · RWE)','World Horti Center','Brightlands'],
   'Agrivoltaics and multi-output land use — food and energy generated on a single land base — alongside open-innovation campus models where education, research and industry continuously co-create.',
   'A conceptual and operational reference for the Living Campus / WPIC, and a basis for evaluating agrivoltaics under tropical conditions without compromising biological productivity.',
   'Site teams at the Agri-Food-Energy Park and the Bedburg Agri-PV facility (Forschungszentrum Jülich · RWE).'));
 
-/* 15 — GOVERNANCE */
+/* 16 — GOVERNANCE */
 S.push(`<section class="slide light">
   <div class="eyebrow g">Partner architecture</div>
   <h1 class="title">Two pillars, one governance</h1>
@@ -693,10 +755,37 @@ S.push(`<section class="slide light">
     <div class="klabel" style="color:var(--lime);letter-spacing:2px">MRV / QA — the common operating language</div>
     <p style="font-size:14.5px;color:#DCE7D3;line-height:1.55;margin-top:12px">Standardized data, traceable workflows, FAIR principles and clear IP turn scientific results into auditable operational protocols. Co-PI structures and shared benefit keep the evidence locally owned.</p>
   </div>
-  ${foot(15)}
+  ${foot(16)}
 </section>`);
 
-/* 16 — MOMENTUM */
+/* 17 — HOW IT OPERATES (docs/01 §governance + cross-cutting metric set) */
+const stages=[['Design','Protocols and validation criteria agreed before work begins.'],
+  ['Pilot evaluation','Controlled first test, with defined stage gates.'],
+  ['Tropical validation','Full-system performance under real farmer conditions.'],
+  ['Knowledge transfer','Into teaching, extension and producer practice.']];
+const metrics=[['Yield &amp; nutritional yield','protein quality / DIAAS · key micronutrients per hectare and per 100 kcal'],
+  ['Safety','mycotoxins · pathogens'],
+  ['Loss reduction','post-harvest and in-system losses'],
+  ['Resource efficiency','g/kWh · L/kg in controlled environments'],
+  ['Adoption','coverage % · persistence over time']];
+S.push(`<section class="slide light midv">
+  <div class="eyebrow g">Governance in practice</div>
+  <h1 class="title">Four stages, one metric set</h1>
+  <div class="sub">Every collaboration advances through the same gates and is judged on the same measures — that is what makes results comparable, auditable and transferable.</div>
+  <div class="stages">
+    ${stages.map((s,i)=>`<div class="stage"><div class="sn">${String(i+1).padStart(2,'0')}</div>
+      <h4>${s[0]}</h4><p>${s[1]}</p></div>`).join('<div class="chev"></div>')}
+  </div>
+  <div class="band tint">
+    <div class="klabel" style="color:var(--green);letter-spacing:2px">What gets measured</div>
+    <div class="metrics">
+      ${metrics.map(m=>`<div class="metric"><b>${m[0]}</b><span>${m[1]}</span></div>`).join('')}
+    </div>
+  </div>
+  ${foot(17)}
+</section>`);
+
+/* 18 — MOMENTUM */
 const mom=[['Aug 17, 2026','var(--gold)','Dr. Onno Müller visits Zamorano','Representing Forschungszentrum Jülich, Brightlands and BASF Nunhems — advancing agrivoltaics, protected agriculture and student engagement.'],
   ['Proof of concept','var(--lime)','Duke University node','A proposed nutrient-sensing and food-innovation pilot that validates the Hub\'s institutional workflow under MRV/QA.'],
   ['Requested','var(--lime)','CLAAS equipment & training roadmap','CLAAS formally asked Zamorano to define its medium- and long-term equipment and training needs for technical cooperation.'],
@@ -710,10 +799,10 @@ S.push(`<section class="slide light">
       <div style="display:flex;align-items:center;gap:12px"><span class="node" style="width:12px;height:12px;background:${m[1]};flex:none"></span><h4>${m[2]}</h4></div>
       <p>${m[3]}</p></div>`).join('')}
   </div>
-  ${foot(16)}
+  ${foot(18)}
 </section>`);
 
-/* 17 — CLOSING */
+/* 19 — CLOSING */
 const traj=[['Adoption','more validated practices put to work'],['Nutrition & safety','protected under climate stress'],
   ['Efficiency','improved resource-use per output'],['Traceability','full MRV/QA with independent verification']];
 S.push(`<section class="slide dark midv">
@@ -728,7 +817,7 @@ S.push(`<section class="slide dark midv">
   <span class="brand l corner" role="img" aria-label="inveenta"></span>
 </section>`);
 
-/* 18 — THE DECISION (the ask, per docs/05 "The board decision") */
+/* 20 — THE DECISION (the ask, per docs/05 "The board decision") */
 const asks=[['Establish the Hub','Formally recognize Zamorano as the Tropical Proof Hub — the place where global agricultural science is validated under real tropical conditions.'],
   ['Endorse the model','Adopt the partner-based architecture: discovery accessed through alliances, validation and translation owned by Zamorano.'],
   ['Adopt the governance','Make MRV/QA the common operating language of every collaboration — traceable, auditable, locally owned.']];
@@ -830,6 +919,54 @@ const ES={
 "The gap — and therefore the role":"La brecha — y por lo tanto el rol",
 "Tropical proof-at-scale":"Validación tropical a escala",
 "+ standardized nutritional-yield metrics + auditable MRV/QA built for resource-limited settings.":"+ métricas estandarizadas de rendimiento nutricional + MRV/QA auditable diseñado para entornos con recursos limitados.",
+/* 07 regional benchmark */
+"The regional picture":"El panorama regional",
+"Strong institutions — a different function":"Instituciones sólidas — una función distinta",
+"The region is not empty. But each of these operates primarily as a research generator or a training centre.":"La región no está vacía. Pero cada una de estas opera principalmente como generadora de investigación o como centro de formación.",
+"Genetic resources":"Recursos genéticos",
+"Deep germplasm development and breeding programs.":"Amplio desarrollo de germoplasma y programas de mejoramiento.",
+"Tropical research capacity":"Capacidad de investigación tropical",
+"Large-scale research generation across tropical systems.":"Generación de investigación a gran escala en sistemas tropicales.",
+"Regional experience":"Experiencia regional",
+"Long institutional presence; policy- and donor-framed programs.":"Larga presencia institucional; programas enmarcados en políticas y cooperación.",
+"Educational outreach":"Proyección educativa",
+"Undergraduate formation and outreach across the region.":"Formación de pregrado y proyección en toda la región.",
+"The complement none of them provides":"El complemento que ninguna de ellas aporta",
+"Full-system validation under real farmer conditions. Zamorano's differentiation is":"Validación de sistema completo en condiciones reales de productor. La diferenciación de Zamorano es",
+"operational":"operativa",
+", not academic — which makes these institutions reference nodes and partners rather than competitors.":", no académica — lo que convierte a estas instituciones en nodos de referencia y socios, más que en competidores.",
+/* 03 source line */
+"Myers et al.,":"Myers et al.,",
+"2014 · Loladze,":"2014 · Loladze,",
+"2014 · Zhao et al.,":"2014 · Zhao et al.,",
+"2017 · Mills et al.,":"2017 · Mills et al.,",
+"2018 — full reference list in the knowledge base.":"2018 — lista completa de referencias en la base de conocimiento.",
+/* 17 how it operates */
+"Governance in practice":"La gobernanza en la práctica",
+"Four stages, one metric set":"Cuatro etapas, un solo conjunto de métricas",
+"Every collaboration advances through the same gates and is judged on the same measures — that is what makes results comparable, auditable and transferable.":"Cada colaboración avanza por las mismas etapas y se evalúa con las mismas medidas — eso es lo que hace que los resultados sean comparables, auditables y transferibles.",
+"Design":"Diseño",
+"Protocols and validation criteria agreed before work begins.":"Protocolos y criterios de validación acordados antes de iniciar el trabajo.",
+"Pilot evaluation":"Evaluación piloto",
+"Controlled first test, with defined stage gates.":"Primera prueba controlada, con puntos de decisión definidos.",
+"Tropical validation":"Validación tropical",
+"Full-system performance under real farmer conditions.":"Desempeño de sistema completo en condiciones reales de productor.",
+"Knowledge transfer":"Transferencia de conocimiento",
+"Into teaching, extension and producer practice.":"Hacia la docencia, la extensión y la práctica del productor.",
+"What gets measured":"Qué se mide",
+"Yield & nutritional yield":"Rendimiento y rendimiento nutricional",
+"protein quality / DIAAS · key micronutrients per hectare and per 100 kcal":"calidad proteica / DIAAS · micronutrientes clave por hectárea y por 100 kcal",
+"Safety":"Inocuidad",
+"mycotoxins · pathogens":"micotoxinas · patógenos",
+"Loss reduction":"Reducción de pérdidas",
+"post-harvest and in-system losses":"pérdidas poscosecha y dentro del sistema",
+"Resource efficiency":"Eficiencia de recursos",
+"g/kWh · L/kg in controlled environments":"g/kWh · L/kg en ambientes controlados",
+"coverage % · persistence over time":"cobertura % · persistencia en el tiempo",
+/* 08 advantage */
+"Farmer-ready validation":"Validación lista para el productor",
+"Pan-Latin neutrality":"Neutralidad panlatinoamericana",
+"Student-to-field chain":"Cadena del estudiante al campo",
 /* 07 advantage */
 "Comparative advantage":"Ventaja comparativa",
 "Zamorano is built to fill it":"Zamorano está construido para ocuparlo",
@@ -995,7 +1132,7 @@ const count=document.getElementById('count'),prog=document.getElementById('prog'
 
 /* stagger: tag the content blocks of every slide so they rise in sequence */
 const EASE='.eyebrow,h1.title,.sub,.t-title,.t-sub,.tagline,.card,.mini,.hubbox,.tcard,.row,.band,.chips,.chev,'
-          +'.close .neg,.close .pos,.askcard,.closer';
+          +'.close .neg,.close .pos,.askcard,.closer,.stage,.metric';
 slides.forEach(s=>[...s.querySelectorAll(EASE)]
   .forEach((el,i)=>{el.classList.add('ease');el.style.setProperty('--i',Math.min(i,9));}));
 
@@ -1011,8 +1148,8 @@ let titles=slides.map(titleOf);
 const ACTS=[
   {name:'Opening',        from:1,  to:1},
   {name:'Act 1 · The shift',      from:2,  to:5},
-  {name:'Act 2 · The open role',  from:6,  to:8},
-  {name:'Act 3 · Already underway',from:9, to:18}
+  {name:'Act 2 · The open role',  from:6,  to:9},
+  {name:'Act 3 · Already underway',from:10,to:20}
 ];
 const actOf=n=>ACTS.find(a=>n>=a.from&&n<=a.to)||ACTS[0];
 const actName=a=>tr(a.name);
@@ -1071,12 +1208,25 @@ function buildOverview(){
     for(let n=a.from;n<=a.to;n++){
       const t=document.createElement('button');
       t.className='thumb';t.dataset.i=n-1;
-      t.innerHTML=`<div class="tn">${pad(n)}</div><div class="tt">${titles[n-1]}</div>`;
+      const shot=document.createElement('div');
+      shot.className='thumbshot';
+      const clone=slides[n-1].cloneNode(true);      // a real miniature, not a text card
+      clone.classList.remove('active','rev');
+      shot.appendChild(clone);
+      t.appendChild(shot);
+      t.insertAdjacentHTML('beforeend',`<div class="tn">${pad(n)}</div><div class="tt">${titles[n-1]}</div>`);
       row.appendChild(t);
     }
     gg.appendChild(row);
   });
   thumbs=[...gg.querySelectorAll('.thumb')];
+}
+/* miniatures can only be scaled once the overview has a width */
+function scaleShots(){
+  document.querySelectorAll('.thumbshot').forEach(sh=>{
+    const c=sh.firstElementChild;
+    if(c&&sh.clientWidth)c.style.transform='scale('+(sh.clientWidth/1280)+')';
+  });
 }
 buildOverview();
 
@@ -1131,7 +1281,7 @@ function buildRead(){
 }
 buildRead();
 
-function show(i,back){
+function show(i,back,fromScroll){
   const n=(i+slides.length)%slides.length;
   if(back===undefined)back=n<cur;
   cur=n;
@@ -1146,17 +1296,26 @@ function show(i,back){
   crumb.querySelector('.ct').textContent=titles[n];
   const it=navitems[n]; if(it&&it.closest('.act').classList.contains('shut'))it.closest('.act').classList.remove('shut');
   if(it)it.scrollIntoView({block:'nearest'});
-  if(document.body.classList.contains('read')){
+  const pc=document.getElementById('pcount');
+  if(pc)pc.textContent=pad(n+1)+' / '+pad(slides.length);
+  if(document.body.classList.contains('read')&&!fromScroll){
     const t=document.getElementById('rd'+(n+1));
     if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
   }
-  if(location.hash!=='#'+(n+1)){hashLock=true;location.hash='#'+(n+1);}
+  if(location.hash!=='#'+(n+1)){
+    /* scroll-driven updates must not spam browser history */
+    if(fromScroll&&history.replaceState)history.replaceState(null,'','#'+(n+1));
+    else {hashLock=true;location.hash='#'+(n+1);}
+  }
 }
 const next=()=>show(cur+1,false), prev=()=>show(cur-1,true);
 
 /* ——— panels & modes ——— */
 const help=document.getElementById('help');
-function overview(on){grid.classList.toggle('on',on);grid.setAttribute('aria-hidden',String(!on));}
+function overview(on){
+  grid.classList.toggle('on',on);grid.setAttribute('aria-hidden',String(!on));
+  if(on)scaleShots();
+}
 function helper(on){help.classList.toggle('on',on);help.setAttribute('aria-hidden',String(!on));}
 function closeAll(){overview(false);helper(false);closeRail();}
 function closeRail(){document.body.classList.remove('railopen');}
@@ -1227,6 +1386,15 @@ addEventListener('touchend',e=>{
   if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))dx<0?next():prev();
 },{passive:true});
 
+/* reading view: keep the rail and breadcrumb in step with the scroll position */
+document.getElementById('read').addEventListener('scroll',()=>{
+  if(!document.body.classList.contains('read'))return;
+  const top=document.getElementById('read').scrollTop+140;
+  let n=1;
+  document.querySelectorAll('.rd-sec').forEach(s=>{if(s.offsetTop<=top)n=+s.id.slice(2);});
+  if(n-1!==cur)show(n-1,undefined,true);
+},{passive:true});
+
 /* deep links: #7 opens slide 7 */
 let hashLock=false;
 addEventListener('hashchange',()=>{
@@ -1254,7 +1422,14 @@ const snap=root=>{
 ['scaler','help','nav','hint'].forEach(id=>snap(document.getElementById(id)));
 [...document.querySelectorAll('.rbtn,.rail-sub,#grid h2,#grid .gsub')].forEach(snap);
 
-function setLang(lang){
+/* swapping every string at once reads as a page reload; a short fade hides the seam */
+function setLang(lang,instant){
+  if(instant||LANG===lang){applyLang(lang);return;}
+  const rd=document.getElementById('read');
+  scaler.style.opacity='0';rd.style.opacity='0';
+  setTimeout(()=>{applyLang(lang);scaler.style.opacity='';rd.style.opacity='';},170);
+}
+function applyLang(lang){
   LANG=(lang==='es')?'es':'en';
   NODES.forEach(r=>{
     r.node.nodeValue=(LANG==='es'&&ES[r.key])?(r.pre+ES[r.key]+r.post):r.en;
@@ -1279,7 +1454,7 @@ function fit(){
   const w=wrap.clientWidth||innerWidth, h=wrap.clientHeight||innerHeight;
   scaler.style.transform='scale('+Math.min(w/1280,h/720)+')';
 }
-addEventListener('resize',()=>{fit();autoRead();});
+addEventListener('resize',()=>{fit();autoRead();scaleShots();});
 
 /* a scaled 1280px stage is unreadable on a phone — open the reading view instead */
 let readForced=false;
@@ -1295,7 +1470,7 @@ show(start>=1&&start<=slides.length?start-1:0,false);
 let saved=null;
 try{saved=localStorage.getItem('tph-lang');}catch(e){}
 const urlLang=/[?&]lang=es/.test(location.search)?'es':/[?&]lang=en/.test(location.search)?'en':null;
-if(urlLang||saved==='es')setLang(urlLang||saved);
+if(urlLang||saved==='es')setLang(urlLang||saved,true);
 autoRead();
 setTimeout(()=>{const h=document.getElementById('hint');if(h)h.style.opacity='0';},5000);
 </script>
