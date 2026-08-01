@@ -110,6 +110,24 @@
   .row h4{font-family:var(--serif);font-size:17px;color:var(--dark)}
   .row p{font-size:13px;color:var(--ink);line-height:1.45}
 
+  /* closing — the decision slide */
+  .close .neg{font-family:var(--serif);font-size:23px;font-weight:700;color:#7E9A8A;line-height:1.35;
+    margin-top:18px;max-width:1010px}
+  .close .pos{font-family:var(--serif);font-size:33px;font-weight:700;color:#fff;line-height:1.24;
+    margin-top:14px;max-width:1080px}
+  .close .pos em{font-style:normal;color:var(--lime)}
+  .askrow{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+  .askcard{background:var(--dark2);border:1px solid #1B5340;border-radius:14px;padding:20px 22px}
+  .askcard .askn{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--lime);margin-bottom:9px}
+  .askcard h4{font-family:var(--serif);font-size:17px;color:#fff;margin-bottom:8px}
+  .askcard p{font-size:12.5px;color:#BFD0B4;line-height:1.5}
+  .closer{margin-top:26px}
+  .closer .rule{display:block;width:64px;height:3px;background:var(--lime);border-radius:2px;margin-bottom:16px}
+  .closer p{font-family:var(--serif);font-size:19px;color:#DCE7D3;line-height:1.45;max-width:1090px}
+  .closer p b{color:#fff}
+  .closer .affirm{font-size:13px;color:#7E9A8A;font-style:italic;margin-top:12px}
+  .closer .affirm em{color:var(--lime);font-style:italic}
+
   /* closing */
   .traj{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
   .tcard{background:var(--dark2);border:1px solid var(--green);border-radius:14px;padding:20px}
@@ -375,7 +393,7 @@
       <div class="hint" id="hint">← / → to navigate &nbsp;·&nbsp; ? for shortcuts</div>
       <div id="nav">
         <button id="prev" aria-label="Previous slide">‹</button>
-        <span id="count" role="button" tabindex="0" title="All slides (O)" aria-live="polite">01 / 17</span>
+        <span id="count" role="button" tabindex="0" title="All slides (O)" aria-live="polite">01 / 18</span>
         <button id="next" aria-label="Next slide">›</button>
         <span class="sep"></span>
         <button id="fs" class="tool" aria-label="Toggle fullscreen" title="Fullscreen (F)">⛶</button>
@@ -710,6 +728,28 @@ S.push(`<section class="slide dark midv">
   <span class="brand l corner" role="img" aria-label="inveenta"></span>
 </section>`);
 
+/* 18 — THE DECISION (the ask, per docs/05 "The board decision") */
+const asks=[['Establish the Hub','Formally recognize Zamorano as the Tropical Proof Hub — the place where global agricultural science is validated under real tropical conditions.'],
+  ['Endorse the model','Adopt the partner-based architecture: discovery accessed through alliances, validation and translation owned by Zamorano.'],
+  ['Adopt the governance','Make MRV/QA the common operating language of every collaboration — traceable, auditable, locally owned.']];
+S.push(`<section class="slide dark close midv">
+  <div class="eyebrow l">The decision</div>
+  <div class="neg">The decision is not whether Zamorano should become a research university.</div>
+  <div class="pos">It is whether Zamorano should formally embrace the role for which it is <em>already</em> uniquely positioned.</div>
+  <div class="askrow">
+    ${asks.map((a,i)=>`<div class="askcard">
+      <div class="askn">${String(i+1).padStart(2,'0')}</div>
+      <h4>${a[0]}</h4><p>${a[1]}</p></div>`).join('')}
+  </div>
+  <div class="closer">
+    <span class="rule"></span>
+    <p>Every partnership enriches teaching. Every validation protocol becomes a learning resource.
+       <b>Every operational field becomes a classroom.</b></p>
+    <div class="affirm">An affirmation of Zamorano's founding <em>learning-by-doing</em> mission — not a departure from it.</div>
+  </div>
+  <span class="brand l corner" role="img" aria-label="inveenta"></span>
+</section>`);
+
 /* ————————————————— Spanish ——————————————————
    Keyed on the exact English string. Institution names, people, product
    names, MRV/QA, Agri-PV and the like are deliberately left untranslated. */
@@ -894,6 +934,23 @@ const ES={
 "improved resource-use per output":"mejor uso de recursos por unidad producida",
 "Traceability":"Trazabilidad",
 "full MRV/QA with independent verification":"MRV/QA completo con verificación independiente",
+/* 18 the decision */
+"The decision":"La decisión",
+"The decision is not whether Zamorano should become a research university.":"La decisión no es si Zamorano debe convertirse en una universidad de investigación.",
+"It is whether Zamorano should formally embrace the role for which it is":"Es si Zamorano debe asumir formalmente el rol para el cual",
+"already":"ya",
+"uniquely positioned.":"está singularmente posicionado.",
+"Establish the Hub":"Establecer el Hub",
+"Formally recognize Zamorano as the Tropical Proof Hub — the place where global agricultural science is validated under real tropical conditions.":"Reconocer formalmente a Zamorano como el Hub Tropical de Validación — el lugar donde la ciencia agrícola global se valida en condiciones tropicales reales.",
+"Endorse the model":"Respaldar el modelo",
+"Adopt the partner-based architecture: discovery accessed through alliances, validation and translation owned by Zamorano.":"Adoptar la arquitectura basada en socios: el descubrimiento se accede mediante alianzas; la validación y la transferencia son propias de Zamorano.",
+"Adopt the governance":"Adoptar la gobernanza",
+"Make MRV/QA the common operating language of every collaboration — traceable, auditable, locally owned.":"Hacer del MRV/QA el lenguaje operativo común de cada colaboración — trazable, auditable y de propiedad local.",
+"Every partnership enriches teaching. Every validation protocol becomes a learning resource.":"Cada alianza enriquece la docencia. Cada protocolo de validación se convierte en un recurso de aprendizaje.",
+"Every operational field becomes a classroom.":"Cada campo en operación se convierte en un aula.",
+"An affirmation of Zamorano's founding":"Una afirmación de la misión fundacional de Zamorano de",
+"learning-by-doing":"aprender-haciendo",
+"mission — not a departure from it.":"— no un alejamiento de ella.",
 /* "Met:" lines — names stay, job titles and connecting text translate */
 "Joerg Wesseimann, Global Product Team Manager – JAGUAR (CLAAS); Luisa Urbanowski, Market Development Manager (LEMKEN).":"Joerg Wesseimann, Gerente Global de Producto – JAGUAR (CLAAS); Luisa Urbanowski, Gerente de Desarrollo de Mercado (LEMKEN).",
 "Hao Shen and Esteban Romnero (GEA); Henk van Dongen, Director of Alternatives & Regenerative Agriculture (Lely).":"Hao Shen y Esteban Romnero (GEA); Henk van Dongen, Director de Alternativas y Agricultura Regenerativa (Lely).",
@@ -937,7 +994,8 @@ const count=document.getElementById('count'),prog=document.getElementById('prog'
       grid=document.getElementById('grid'),gg=document.getElementById('gg'),pad=n=>String(n).padStart(2,'0');
 
 /* stagger: tag the content blocks of every slide so they rise in sequence */
-const EASE='.eyebrow,h1.title,.sub,.t-title,.t-sub,.tagline,.card,.mini,.hubbox,.tcard,.row,.band,.chips,.chev';
+const EASE='.eyebrow,h1.title,.sub,.t-title,.t-sub,.tagline,.card,.mini,.hubbox,.tcard,.row,.band,.chips,.chev,'
+          +'.close .neg,.close .pos,.askcard,.closer';
 slides.forEach(s=>[...s.querySelectorAll(EASE)]
   .forEach((el,i)=>{el.classList.add('ease');el.style.setProperty('--i',Math.min(i,9));}));
 
@@ -954,7 +1012,7 @@ const ACTS=[
   {name:'Opening',        from:1,  to:1},
   {name:'Act 1 · The shift',      from:2,  to:5},
   {name:'Act 2 · The open role',  from:6,  to:8},
-  {name:'Act 3 · Already underway',from:9, to:17}
+  {name:'Act 3 · Already underway',from:9, to:18}
 ];
 const actOf=n=>ACTS.find(a=>n>=a.from&&n<=a.to)||ACTS[0];
 const actName=a=>tr(a.name);
@@ -1031,7 +1089,7 @@ function buildRead(){
       <h1>${esc(titles[0])}</h1><p>${esc(leadOf(slides[0]))}</p></div><div class="rd-wrap">`;
   slides.forEach((s,i)=>{
     if(i===0)return;
-    const items=[...s.querySelectorAll('.mini,.card,.tcard,.hubbox,.row')].map(el=>{
+    const items=[...s.querySelectorAll('.mini,.card,.tcard,.hubbox,.row,.askcard')].map(el=>{
       /* heading: a real heading, else the KPI figure + its label, else the small caps label */
       const h=el.querySelector('h3,h4');
       const big=el.querySelector('.big'), lab=el.querySelector('.lab');
@@ -1055,12 +1113,19 @@ function buildRead(){
              lines.map(t=>`<p>${esc(t)}</p>`).join('')+`</div>`;
     }).join('');
     const chips=[...s.querySelectorAll('.chip')].map(c=>`<span>${esc(c.textContent.trim())}</span>`).join('');
+    const flat=e=>e.textContent.replace(/\s+/g,' ').trim();
+    /* the closing slide carries its argument in .neg/.pos and .closer, not in a .sub */
+    const leads=[...s.querySelectorAll('.neg,.pos')].map(e=>`<div class="rd-lead">${esc(flat(e))}</div>`).join('');
+    const closer=[...s.querySelectorAll('.closer p,.closer .affirm')]
+      .map(e=>`<p>${esc(flat(e))}</p>`).join('');
     html+=`<section class="rd-sec" id="rd${i+1}">
       <div class="rd-n">${pad(i+1)} · ${esc((s.querySelector('.eyebrow')||{}).textContent||actName(actOf(i+1)))}</div>
       <h2>${esc(titles[i])}</h2>
       ${leadOf(s)?`<div class="rd-lead">${esc(leadOf(s))}</div>`:''}
+      ${leads}
       ${chips?`<div class="rd-tags">${chips}</div>`:''}
-      ${items}</section>`;
+      ${items}
+      ${closer?`<div class="rd-item">${closer}</div>`:''}</section>`;
   });
   read.innerHTML=html+'</div>';
 }
@@ -1175,25 +1240,25 @@ addEventListener('hashchange',()=>{
    English, then swapped in place. Everything derived from the slides (rail,
    overview, reading view, breadcrumb) is rebuilt from the swapped DOM. */
 const NODES=[];
-['scaler','help','nav','hint'].forEach(id=>{
-  const root=document.getElementById(id);
+const snap=root=>{
   const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
   let n; while(n=w.nextNode()){
     const key=n.nodeValue.replace(/\s+/g,' ').trim();
-    if(key)NODES.push({node:n,en:n.nodeValue,key});
+    if(!key)continue;
+    /* keep the node's own leading/trailing whitespace: a translated string
+       sitting next to an inline <b>/<em> would otherwise glue to it */
+    const m=n.nodeValue.match(/^(\s*)[\s\S]*?(\s*)$/);
+    NODES.push({node:n,en:n.nodeValue,key,pre:m[1],post:m[2]});
   }
-});
-[...document.querySelectorAll('.rbtn,.rail-sub,#grid h2,#grid .gsub')].forEach(el=>{
-  const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);
-  let n; while(n=w.nextNode()){
-    const key=n.nodeValue.replace(/\s+/g,' ').trim();
-    if(key)NODES.push({node:n,en:n.nodeValue,key});
-  }
-});
+};
+['scaler','help','nav','hint'].forEach(id=>snap(document.getElementById(id)));
+[...document.querySelectorAll('.rbtn,.rail-sub,#grid h2,#grid .gsub')].forEach(snap);
 
 function setLang(lang){
   LANG=(lang==='es')?'es':'en';
-  NODES.forEach(r=>{r.node.nodeValue=LANG==='es'?(ES[r.key]||r.en):r.en;});
+  NODES.forEach(r=>{
+    r.node.nodeValue=(LANG==='es'&&ES[r.key])?(r.pre+ES[r.key]+r.post):r.en;
+  });
   document.documentElement.lang=LANG;
   document.title=DOC[LANG].title;
   document.querySelector('.rail-title').textContent=

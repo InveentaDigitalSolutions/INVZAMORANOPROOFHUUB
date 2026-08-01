@@ -10,7 +10,7 @@ Strategic positioning materials for the Zamorano University (Escuela Agrícola P
 
 | Path | What it is |
 |------|------------|
-| [`index.html`](index.html) | The board presentation (17 slides, self-contained HTML — open in any browser or serve via GitHub Pages) |
+| [`index.html`](index.html) | The board presentation (18 slides, self-contained HTML — open in any browser or serve via GitHub Pages) |
 | [`Zamorano_Tropical_Proof_Hub.pptx`](Zamorano_Tropical_Proof_Hub.pptx) | The same deck as an editable PowerPoint file |
 | [`docs/`](docs/) | The full knowledge base behind the deck, as Markdown |
 
@@ -30,7 +30,7 @@ Strategic positioning materials for the Zamorano University (Escuela Agrícola P
 
 Open `index.html` directly in a browser, or publish it with **GitHub Pages** (Settings → Pages → deploy from the `main` branch, root folder). The deck scales to any screen and needs no network access.
 
-It opens as an application rather than a bare slideshow: a left rail lists all 17 slides grouped by the three-act spine, the top bar shows where you are, and the deck itself sits in the main pane.
+It opens as an application rather than a bare slideshow: a left rail lists all 18 slides grouped by the three-act spine, the top bar shows where you are, and the deck itself sits in the main pane.
 
 ### Views
 
@@ -65,7 +65,7 @@ On slide 09, the five pillar tiles are clickable — each opens its detail slide
 
 ### PDF
 
-`Cmd/Ctrl-P` prints the full deck — all 17 slides, one per landscape page, chrome removed. Use it to produce a PDF for circulation; unlike the `.pptx`, it can't drift from the HTML.
+`Cmd/Ctrl-P` prints the full deck — all 18 slides, one per landscape page, chrome removed. Use it to produce a PDF for circulation; unlike the `.pptx`, it can't drift from the HTML.
 
 ## Provenance
 

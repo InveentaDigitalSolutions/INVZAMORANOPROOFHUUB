@@ -29,7 +29,7 @@ The mission built the partner architecture. The visits resolve cleanly into five
 4. **Protected agriculture, seeds & markets** — BASF Nunhems, Koppert Cress, World Horti Center, Royal FloraHolland, Brightlands: greenhouse seed production, high-value crops, and market access.
 5. **Energy–land integration & ecosystem models** — Agri-Food-Energy Park and Agri-PV (Jülich + RWE), plus Brightlands and World Horti Center as blueprints for the WPIC / Living Campus.
 
-## Slide flow (17 slides)
+## Slide flow (18 slides)
 
 1. Title
 2. Bridge — from mission report to strategic position
@@ -44,6 +44,7 @@ The mission built the partner architecture. The visits resolve cleanly into five
 15. Partner architecture & MRV/QA governance
 16. Momentum — already in motion
 17. Closing — the holistic view and five-year trajectory
+18. The decision — the ask: establish the Hub, endorse the partner-based model, adopt MRV/QA governance
 
 ## The board framing
 
