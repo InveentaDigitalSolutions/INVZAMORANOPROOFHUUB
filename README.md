@@ -28,7 +28,20 @@ Strategic positioning materials for the Zamorano University (Escuela Agrícola P
 
 ## Viewing the deck
 
-Open `index.html` directly in a browser, or publish it with **GitHub Pages** (Settings → Pages → deploy from the `main` branch, root folder). Navigate with the on-screen arrows or the ← / → keys.
+Open `index.html` directly in a browser, or publish it with **GitHub Pages** (Settings → Pages → deploy from the `main` branch, root folder). The deck scales to any screen and needs no network access.
+
+### Controls
+
+| Action | How |
+|--------|-----|
+| Next / previous slide | `→` `←` · `Space` · `PageUp` / `PageDown` · on-screen arrows · click the slide · swipe on touch |
+| All slides at a glance | `O`, or click the slide counter — then click any slide to jump there |
+| Close the overview | `Esc` |
+| First / last slide | `Home` / `End` |
+| Fullscreen | `F`, or the ⛶ button |
+| Link to one slide | Add the slide number to the URL, e.g. `…/index.html#9` |
+
+On slide 09, the five pillar tiles are clickable — each opens its detail slide (10–14). Hovering any tile lifts it and lets its neighbours recede. Motion is disabled automatically for viewers with *reduce motion* enabled in their OS.
 
 ## Provenance
 
