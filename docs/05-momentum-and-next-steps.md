@@ -1,6 +1,6 @@
 # Momentum & Next Steps
 
-*Concrete commitments already in motion — the architecture is being built, not merely proposed.*
+*Concrete commitments already in motion — the strategy is being built, not merely proposed.*
 
 ## Already in motion
 

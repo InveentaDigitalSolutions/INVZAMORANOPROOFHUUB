@@ -2,7 +2,7 @@
 
 *How the Tropical Proof Hub is organized, and how it compares to the world's leading research ecosystems.*
 
-## The two-pillar partner architecture
+## The two-pillar partner strategy
 
 Partnerships are organized by **complementary strengths, not institutional similarity**. Two roles close the structural gap:
 

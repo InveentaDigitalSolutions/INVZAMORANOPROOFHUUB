@@ -4,7 +4,7 @@
 
 ## Core message
 
-The European mission was not a tour of companies — it was the assembly of a **partner architecture**. Each institution the delegation visited maps to a capability Zamorano needs to occupy a role no other institution holds: the place where the world's agricultural science is validated and translated under real tropical conditions — the **Tropical Proof Hub**.
+The European mission was not a tour of companies — it was the assembly of a **partner strategy**. Each institution the delegation visited maps to a capability Zamorano needs to occupy a role no other institution holds: the place where the world's agricultural science is validated and translated under real tropical conditions — the **Tropical Proof Hub**.
 
 That single reframe is what carries the Board from *"here is what we saw in Europe"* (the first presentation) to *"here is what it means and where it places us"* (this one). The visits stop being fifteen separate relationships and become one coherent system.
 
@@ -19,7 +19,7 @@ Agricultural success is no longer defined by yield alone. The frontier has moved
 No global research ecosystem today combines frontier scientific capability with tropical proof-at-scale under auditable governance. That gap is the role. Zamorano is structurally positioned to fill it: a 4,000-hectare living agricultural system, farmer-ready validation rather than discovery only, pan-Latin regional neutrality, and a student-to-field distribution chain no research institute can match. This is the Tropical Proof Hub — discovery accessed through partners, validation and translation owned by Zamorano.
 
 ### Act 3 — The proof it is already underway
-The mission built the partner architecture. The visits resolve cleanly into five capability pillars, and the momentum is concrete rather than aspirational (see [`05-momentum-and-next-steps.md`](05-momentum-and-next-steps.md)).
+The mission built the partner strategy. The visits resolve cleanly into five capability pillars, and the momentum is concrete rather than aspirational (see [`05-momentum-and-next-steps.md`](05-momentum-and-next-steps.md)).
 
 ## The five capability pillars
 
@@ -40,9 +40,9 @@ The mission built the partner architecture. The visits resolve cleanly into five
 7. The regional picture — CIMMYT/CIAT, Embrapa/CGIAR, CATIE, EARTH: strong institutions, a different function
 8. Zamorano's advantage — the living laboratory
 9. The Tropical Proof Hub defined (Discovery → Validation → Adoption)
-10. The mission as architecture — five pillars overview
+10. The mission as strategy — five pillars overview
 11–15. One slide per pillar (capability gained / what it unlocks)
-16. Partner architecture & MRV/QA governance
+16. Partner strategy & MRV/QA governance
 17. How it operates — the four stage gates and the cross-cutting metric set
 18. Momentum — already in motion
 19. Closing — the holistic view and five-year trajectory

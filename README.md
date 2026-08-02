@@ -2,7 +2,7 @@
 
 Strategic positioning materials for the Zamorano University (Escuela Agrícola Panamericana) Board of Trustees, built on the June 22 – July 2, 2026 European institutional mission.
 
-**Core message:** the European mission was not a tour of companies — it was the assembly of a partner architecture. Each institution maps to a capability Zamorano needs to occupy a role no other institution holds: *the place where global agricultural science is validated and translated under real tropical conditions* — the **Tropical Proof Hub**.
+**Core message:** the European mission was not a tour of companies — it was the assembly of a partner strategy. Each institution maps to a capability Zamorano needs to occupy a role no other institution holds: *the place where global agricultural science is validated and translated under real tropical conditions* — the **Tropical Proof Hub**.
 
 > Scientific discovery. Tropical validation. Adoption at scale.
 
@@ -22,7 +22,7 @@ Strategic positioning materials for the Zamorano University (Escuela Agrícola P
 | [`docs/01-tropical-proof-hub-framework.md`](docs/01-tropical-proof-hub-framework.md) | The full strategic positioning framework, including the capability–problem matrix |
 | [`docs/02-scientific-connectivity.md`](docs/02-scientific-connectivity.md) | Why the future of agricultural innovation depends on connected scientific ecosystems |
 | [`docs/03-european-mission-visits.md`](docs/03-european-mission-visits.md) | Full report of all institutional visits |
-| [`docs/04-partner-architecture-and-benchmark.md`](docs/04-partner-architecture-and-benchmark.md) | The two-pillar partner model, MRV/QA governance, and the research-ecosystem benchmark |
+| [`docs/04-partner-strategy-and-benchmark.md`](docs/04-partner-strategy-and-benchmark.md) | The two-pillar partner model, MRV/QA governance, and the research-ecosystem benchmark |
 | [`docs/05-momentum-and-next-steps.md`](docs/05-momentum-and-next-steps.md) | Concrete commitments already in motion |
 | [`docs/references.md`](docs/references.md) | Scientific references cited in the framework |
 
