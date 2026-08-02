@@ -1,6 +1,6 @@
 # Toward a Tropical Proof Hub — A Strategic Positioning Framework for Zamorano
 
-*Global science. Validation first. Adoption at scale.*
+*Scientific discovery. Tropical validation. Adoption at scale.*
 Zamorano University (Escuela Agrícola Panamericana, Inc.) · rev. June 26, 2026
 
 ## Executive summary
