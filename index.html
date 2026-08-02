@@ -124,6 +124,12 @@
   .metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:14px}
   .metric b{display:block;font-size:12.5px;color:var(--dark);margin-bottom:5px}
   .metric span{font-size:11.5px;color:var(--muted);line-height:1.4;display:block}
+  /* per-slide glossary of abbreviations */
+  .gloss{position:absolute;left:72px;right:215px;bottom:54px;font-size:9.5px;line-height:1.5;
+    color:var(--muted);letter-spacing:.2px}
+  .slide.dark .gloss{color:#5F7D6C}
+  .gloss b{font-weight:700;color:var(--green)}
+  .slide.dark .gloss b{color:#8FA79A}
   .srcline{font-size:11px;color:var(--muted);margin-top:10px;font-style:normal}
 
   /* closing — the decision slide */
@@ -1158,6 +1164,73 @@ const ACTS=[
 const actOf=n=>ACTS.find(a=>n>=a.from&&n<=a.to)||ACTS[0];
 const actName=a=>tr(a.name);
 
+
+/* ——— per-slide glossary: every abbreviation used on that slide ——— */
+const GLOSS_EN={
+ 3:[['PNAS','Proceedings of the National Academy of Sciences']],
+ 4:[['AI','artificial intelligence'],['JUWELS · JUPITER','supercomputers at the Jülich Supercomputing Centre']],
+ 6:[['FZ Jülich','Forschungszentrum Jülich'],['HPC','high-performance computing'],['AI','artificial intelligence'],
+    ['CEA','controlled-environment agriculture'],['INRAE','France\u2019s National Research Institute for Agriculture, Food and Environment'],
+    ['CERN','European Organization for Nuclear Research'],['UC Davis','University of California, Davis'],
+    ['MRV/QA','Measurement, Reporting, Verification / Quality Assurance']],
+ 7:[['CIMMYT','International Maize and Wheat Improvement Center'],['CIAT','International Center for Tropical Agriculture'],
+    ['CGIAR','global agricultural research partnership'],['CATIE','Centro Agronómico Tropical de Investigación y Enseñanza'],
+    ['EARTH','EARTH University, Costa Rica']],
+ 9:[['MRV/QA','Measurement, Reporting, Verification / Quality Assurance']],
+ 10:[['FZ Jülich','Forschungszentrum Jülich'],['IBG-2','Institute of Bio- and Geosciences 2: Plant Sciences'],
+    ['JSC','Jülich Supercomputing Centre'],['Agri-PV','agrivoltaics — crops and photovoltaics on one land base'],
+    ['RWE','RWE AG, German energy utility']],
+ 11:[['IBG-2','Institute of Bio- and Geosciences 2: Plant Sciences'],['JSC','Jülich Supercomputing Centre'],
+    ['AI','artificial intelligence']],
+ 15:[['Agri-PV','agrivoltaics — crops and photovoltaics on one land base'],['RWE','RWE AG, German energy utility'],
+    ['PhD','doctorate']],
+ 16:[['MRV/QA','Measurement, Reporting, Verification / Quality Assurance'],
+    ['FAIR','findable, accessible, interoperable, reusable (data principles)'],
+    ['IP','intellectual property'],['Co-PI','co-principal investigator'],['UC Davis','University of California, Davis']],
+ 17:[['DIAAS','Digestible Indispensable Amino Acid Score'],['g/kWh · L/kg','grams per kilowatt-hour · litres per kilogram']],
+ 18:[['MRV/QA','Measurement, Reporting, Verification / Quality Assurance']],
+ 19:[['MRV/QA','Measurement, Reporting, Verification / Quality Assurance']],
+ 20:[['MRV/QA','Measurement, Reporting, Verification / Quality Assurance']]
+};
+const GLOSS_ES={
+ 3:[['PNAS','Proceedings of the National Academy of Sciences']],
+ 4:[['AI','inteligencia artificial'],['JUWELS · JUPITER','supercomputadoras del Jülich Supercomputing Centre']],
+ 6:[['FZ Jülich','Forschungszentrum Jülich'],['HPC','computación de alto rendimiento'],['AI','inteligencia artificial'],
+    ['CEA','agricultura en ambiente controlado'],['INRAE','Instituto Nacional de Investigación de Francia para la Agricultura, la Alimentación y el Medio Ambiente'],
+    ['CERN','Organización Europea para la Investigación Nuclear'],['UC Davis','Universidad de California, Davis'],
+    ['MRV/QA','Medición, Reporte y Verificación / Aseguramiento de la Calidad']],
+ 7:[['CIMMYT','Centro Internacional de Mejoramiento de Maíz y Trigo'],['CIAT','Centro Internacional de Agricultura Tropical'],
+    ['CGIAR','alianza mundial de investigación agrícola'],['CATIE','Centro Agronómico Tropical de Investigación y Enseñanza'],
+    ['EARTH','Universidad EARTH, Costa Rica']],
+ 9:[['MRV/QA','Medición, Reporte y Verificación / Aseguramiento de la Calidad']],
+ 10:[['FZ Jülich','Forschungszentrum Jülich'],['IBG-2','Instituto de Biociencias y Geociencias 2: Ciencias Vegetales'],
+    ['JSC','Jülich Supercomputing Centre'],['Agri-PV','agrivoltaica — cultivos y fotovoltaica sobre una misma tierra'],
+    ['RWE','RWE AG, empresa energética alemana']],
+ 11:[['IBG-2','Instituto de Biociencias y Geociencias 2: Ciencias Vegetales'],['JSC','Jülich Supercomputing Centre'],
+    ['AI','inteligencia artificial']],
+ 15:[['Agri-PV','agrivoltaica — cultivos y fotovoltaica sobre una misma tierra'],['RWE','RWE AG, empresa energética alemana'],
+    ['PhD','doctorado']],
+ 16:[['MRV/QA','Medición, Reporte y Verificación / Aseguramiento de la Calidad'],
+    ['FAIR','localizable, accesible, interoperable y reutilizable (principios de datos)'],
+    ['IP','propiedad intelectual'],['Co-PI','co-investigador principal'],['UC Davis','Universidad de California, Davis']],
+ 17:[['DIAAS','Puntuación de Aminoácidos Indispensables Digestibles'],['g/kWh · L/kg','gramos por kilovatio-hora · litros por kilogramo']],
+ 18:[['MRV/QA','Medición, Reporte y Verificación / Aseguramiento de la Calidad']],
+ 19:[['MRV/QA','Medición, Reporte y Verificación / Aseguramiento de la Calidad']],
+ 20:[['MRV/QA','Medición, Reporte y Verificación / Aseguramiento de la Calidad']]
+};
+function renderGloss(){
+  slides.forEach((s,i)=>{
+    const old=s.querySelector('.gloss'); if(old)old.remove();
+    const entries=(LANG==='es'?GLOSS_ES:GLOSS_EN)[i+1];
+    if(!entries)return;
+    const d=document.createElement('div');
+    d.className='gloss';
+    d.innerHTML=entries.map(e=>`<b>${e[0]}</b> ${e[1]}`).join(' &nbsp;·&nbsp; ');
+    s.appendChild(d);
+  });
+}
+renderGloss();
+
 /* ——— left rail: acts → slides ——— */
 const secnav=document.getElementById('secnav');
 let navitems=[];
@@ -1446,6 +1519,7 @@ function applyLang(lang){
   document.querySelector('.rail-title').textContent=
     LANG==='es'?'El Hub Tropical de Validación':'The Tropical Proof Hub';
   titles=slides.map(titleOf);                     // headings changed → rebuild everything derived
+  renderGloss();
   buildRail();buildBar();buildOverview();buildRead();
   [...document.querySelectorAll('.lang b')].forEach(b=>b.classList.toggle('on',b.dataset.l===LANG));
   try{localStorage.setItem('tph-lang',LANG);}catch(e){}
