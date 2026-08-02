@@ -4,7 +4,7 @@ Strategic positioning materials for the Zamorano University (Escuela Agrícola P
 
 **Core message:** the European mission was not a tour of companies — it was the assembly of a partner architecture. Each institution maps to a capability Zamorano needs to occupy a role no other institution holds: *the place where global agricultural science is validated and translated under real tropical conditions* — the **Tropical Proof Hub**.
 
-> Governance first. Evidence always. Adoption at scale.
+> Global science. Validation first. Adoption at scale.
 
 ## Contents
 

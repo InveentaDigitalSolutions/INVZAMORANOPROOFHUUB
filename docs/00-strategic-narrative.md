@@ -8,7 +8,7 @@ The European mission was not a tour of companies — it was the assembly of a **
 
 That single reframe is what carries the Board from *"here is what we saw in Europe"* (the first presentation) to *"here is what it means and where it places us"* (this one). The visits stop being fifteen separate relationships and become one coherent system.
 
-Tagline: **Governance first. Evidence always. Adoption at scale.**
+Tagline: **Global science. Validation first. Adoption at scale.**
 
 ## The three-act spine
 
