@@ -504,7 +504,7 @@ S.push(`<section class="slide light">
       <div style="display:flex;align-items:center;gap:12px"><span class="node" style="width:20px;height:20px;background:var(--lime)"></span>
         <span class="klabel" style="color:var(--lime)">This presentation</span></div>
       <h3 style="font-family:var(--serif);font-size:22px;color:#fff;margin:18px 0 12px">What it means.</h3>
-      <p style="font-size:15px;color:#DCE7D3;line-height:1.5">How agriculture is changing, the role Zamorano is uniquely built to occupy and hold, and one coherent vision.</p>
+      <p style="font-size:15px;color:#DCE7D3;line-height:1.5">How agriculture is changing, the role Zamorano is uniquely built to occupy and hold, and how these separate visits become one coherent vision.</p>
       <div style="font-size:13px;font-weight:700;color:#9FB394;margin-top:26px">A holistic view for the Board</div>
     </div>
   </div>
@@ -592,6 +592,7 @@ S.push(`<section class="slide light">
 /* 6 — OPEN ROLE */
 const eco=[['FZ Jülich','HPC / AI, phenotyping, sensors, quantum'],
   ['Cornell','Nanofab + photonics → CEA → post-harvest'],
+  ['CERN','Fundamental physics, detectors, shared infrastructure'],
   ['Wageningen','Systems, circularity & living labs'],
   ['INRAE','Policy, One-Health & agro-system depth'],
   ['UC Davis','Post-harvest, food safety & extension']];
@@ -599,13 +600,13 @@ S.push(`<section class="slide light">
   <div class="eyebrow g">The open role</div>
   <h1 class="title">No single ecosystem does it all</h1>
   <div class="sub">Each leading research ecosystem leads somewhere — none combines frontier capability with tropical proof-at-scale.</div>
-  <div class="g5">
+  <div class="g5" style="grid-template-columns:repeat(6,1fr)">
     ${eco.map(e=>`<div class="mini"><h3 style="font-size:17px">${e[0]}</h3><p style="font-size:12px">${e[1]}</p></div>`).join('')}
   </div>
   <div class="band dark shadow">
     <div class="klabel" style="color:var(--lime);letter-spacing:2px">The gap — and therefore the role</div>
     <div style="margin-top:12px"><span style="font-family:var(--serif);font-size:19px;font-weight:700;color:#fff">Tropical proof-at-scale</span>
-      <span style="font-size:15px;color:#DCE7D3"> + standardized nutritional-yield metrics + auditable MRV/QA built for resource-limited settings.</span></div>
+      <span style="font-size:15px;color:#DCE7D3"> + standardized nutritional-yield metrics + auditable Measurement, Reporting, Verification / Quality Assurance built for resource-limited settings.</span></div>
   </div>
   ${foot(6)}
 </section>`);
@@ -635,11 +636,11 @@ S.push(`<section class="slide light midv">
 /* 8 — ADVANTAGE */
 const adv=[['4,000+','Hectares','A living agricultural system — not a research plot. Innovations are tested under real farm dynamics.',true],
   [null,'Farmer-ready validation','Validation under real production conditions, not discovery alone — closing the prototype-to-proof gap.',false],
-  [null,'Pan-Latin neutrality','Non-governmental and regionally neutral — a trusted convening site for multinational validation.',false],
+  [null,'Pan-American neutrality','Non-governmental and regionally neutral — a trusted convening site for multinational validation.',false],
   [null,'Student-to-field chain','An alumni network across every agro-ecological zone of Latin America — translation faster than any extension service.',false]];
 S.push(`<section class="slide light">
   <div class="eyebrow g">Comparative advantage</div>
-  <h1 class="title">Zamorano is built to fill it</h1>
+  <h1 class="title">Zamorano is built for this purpose</h1>
   <div class="sub">A living agricultural system where research, education, production and extension operate as one platform.</div>
   <div class="g4">
     ${adv.map(a=>`<div class="card stat ${a[3]?'dark shadow':''}" style="${a[3]?'background:var(--dark)':'background:var(--tint)'}">
@@ -862,7 +863,7 @@ const ES={
 "June 22 – July 2, 2026":"22 de junio – 2 de julio de 2026",
 "This presentation":"Esta presentación",
 "What it means.":"Lo que significa.",
-"How agriculture is changing, the role Zamorano is uniquely built to occupy and hold, and one coherent vision.":"Cómo está cambiando la agricultura, el rol que Zamorano está singularmente construido para ocupar y sostener, y una visión coherente.",
+"How agriculture is changing, the role Zamorano is uniquely built to occupy and hold, and how these separate visits become one coherent vision.":"Cómo está cambiando la agricultura, el rol que Zamorano está singularmente construido para ocupar y sostener, y cómo estas visitas separadas se convierten en una sola visión coherente.",
 "A holistic view for the Board":"Una visión integral para la Junta",
 "ZAMORANO · THE TROPICAL PROOF HUB":"ZAMORANO · EL HUB TROPICAL DE VALIDACIÓN",
 /* 03 the shift */
@@ -910,6 +911,7 @@ const ES={
 "To participate in, contribute to, and benefit from advances that no single institution generates alone.":"Participar en, contribuir a y beneficiarse de avances que ninguna institución genera por sí sola.",
 "As agricultural challenges grow more complex, connectivity becomes part of scientific capacity itself.":"A medida que los desafíos agrícolas se vuelven más complejos, la conectividad pasa a formar parte de la propia capacidad científica.",
 /* 06 open role */
+"Fundamental physics, detectors, shared infrastructure":"Física fundamental, detectores, infraestructura compartida",
 "The open role":"El rol por ocupar",
 "No single ecosystem does it all":"Ningún ecosistema lo hace todo",
 "Each leading research ecosystem leads somewhere — none combines frontier capability with tropical proof-at-scale.":"Cada ecosistema líder de investigación lidera en algo — ninguno combina capacidad de frontera con validación tropical a escala.",
@@ -920,7 +922,7 @@ const ES={
 "Post-harvest, food safety & extension":"Poscosecha, inocuidad alimentaria y extensión",
 "The gap — and therefore the role":"La brecha — y por lo tanto el rol",
 "Tropical proof-at-scale":"Validación tropical a escala",
-"+ standardized nutritional-yield metrics + auditable MRV/QA built for resource-limited settings.":"+ métricas estandarizadas de rendimiento nutricional + MRV/QA auditable diseñado para entornos con recursos limitados.",
+"+ standardized nutritional-yield metrics + auditable Measurement, Reporting, Verification / Quality Assurance built for resource-limited settings.":"+ métricas estandarizadas de rendimiento nutricional + Medición, Reporte y Verificación / Aseguramiento de la Calidad auditables, diseñados para entornos con recursos limitados.",
 /* 07 regional benchmark */
 "The regional picture":"El panorama regional",
 "Strong institutions — a different function":"Instituciones sólidas — una función distinta",
@@ -967,11 +969,11 @@ const ES={
 "coverage % · persistence over time":"cobertura % · persistencia en el tiempo",
 /* 08 advantage */
 "Farmer-ready validation":"Validación lista para el productor",
-"Pan-Latin neutrality":"Neutralidad panlatinoamericana",
+"Pan-American neutrality":"Neutralidad panamericana",
 "Student-to-field chain":"Cadena del estudiante al campo",
 /* 07 advantage */
 "Comparative advantage":"Ventaja comparativa",
-"Zamorano is built to fill it":"Zamorano está construido para ocuparlo",
+"Zamorano is built for this purpose":"Zamorano está construido para este propósito",
 "A living agricultural system where research, education, production and extension operate as one platform.":"Un sistema agrícola vivo donde investigación, educación, producción y extensión operan como una sola plataforma.",
 "Hectares":"Hectáreas",
 "A living agricultural system — not a research plot. Innovations are tested under real farm dynamics.":"Un sistema agrícola vivo — no una parcela experimental. Las innovaciones se prueban bajo la dinámica real de una finca.",
@@ -1244,7 +1246,7 @@ function buildRead(){
       ${tagline?`<div class="rd-tag">${esc(tagline)}</div>`:''}</div><div class="rd-wrap">`;
   slides.forEach((s,i)=>{
     if(i===0)return;
-    const items=[...s.querySelectorAll('.mini,.card,.tcard,.hubbox,.row,.askcard')].map(el=>{
+    const items=[...s.querySelectorAll('.mini,.card,.tcard,.hubbox,.row,.askcard,.band')].map(el=>{
       /* heading: a real heading, else the KPI figure + its label, else the small caps label */
       const h=el.querySelector('h3,h4');
       const big=el.querySelector('.big'), lab=el.querySelector('.lab');
